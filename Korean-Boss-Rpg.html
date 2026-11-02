@@ -369,6 +369,9 @@
             [wordStats, setWordStats] = R.useState({}),
             [dictLoaded, setDictLoaded] = R.useState(false),
             [shownEmojis, setShownEmojis] = R.useState([]),
+            [gameMode, setGameMode] = R.useState("word"),
+            [sentences, setSentences] = R.useState([]),
+            [sentencesLoaded, setSentencesLoaded] = R.useState(false),
             [Wo, Ao] = R.useState(false),       // attackAnim
             [Bo, Jn] = R.useState(0),           // lastCorrectAt
             [su] = R.useState(() => new Set()), // set of learned words
@@ -483,6 +486,12 @@
 
             /* ─────────── ВЫБОР СЛОВА ─────────── */
             Zf = (P) => {
+              if (gameMode === "sentence") {
+                const s = pickSentence(P);
+                if (s) return s;
+                // fallback: если предложения не загрузились — берём слово
+              }
+
               let s = 0.25,
                       t = Math.min(1 - s, s + P / 150),
                       n = Math.random(),
@@ -548,6 +557,29 @@
               };
             },
 
+            pickSentence = (P) => {
+              if (!sentences.length) return null;
+
+              // прогресс по индексу предложения (0..len-1), с небольшим разбросом
+              const progress = Math.min(1, P / 150);
+              const center   = Math.floor(progress * sentences.length);
+              const spread   = Math.floor(sentences.length * 0.10) || 1;
+              const lo = Math.max(0, center - spread);
+              const hi = Math.min(sentences.length - 1, center + spread);
+              const idx = lo + Math.floor(Math.random() * (hi - lo + 1));
+              const s = sentences[idx];
+              const correctOpt = s.options.find(o => o.correct);
+
+              return {
+                ko:         s.sentence_ko,
+                ru:         correctOpt ? correctOpt.text : "",
+                len:        s.sentence_ko.length,
+                targetWord: s.target_word,
+                options:    s.options,
+                isSentence: true,
+              };
+            },
+
             /* ─────────── СТАТИСТИКА ─────────── */
             topWords = (dir = "easy", n = 3) => {
               const SPEED_CAP_MS = 10000;  // 10 сек = «очень медленно», speedScore = 0
@@ -580,6 +612,14 @@
 
             /* ─────────── НОВОЕ СЛОВО ─────────── */
             pickNewWord = (P) => {
+              if (gameMode === "sentence") {
+                let w, i = 0;
+                do { w = Zf(S); } while (w && w.ko === P.ko && ++i < 10);
+                if (w) speakKorean(w.ko);
+                setShownEmojis([]);
+                if (z) setPrevWord(z.word);
+                return w || P;
+              }
               let w, i = 0;
               do {
                 w = Zf(S);
@@ -592,6 +632,16 @@
 
             /* ─────────── ВАРИАНТЫ ОТВЕТА ─────────── */
             qn = (P) => {
+              if (P.isSentence && Array.isArray(P.options)) {
+                // перемешиваем заранее заготовленные варианты
+                const opts = P.options.slice();
+                for (let i = opts.length - 1; i > 0; i--) {
+                  const j = Math.floor(Math.random() * (i + 1));
+                  [opts[i], opts[j]] = [opts[j], opts[i]];
+                }
+                return opts.map(o => o.text);
+              }
+
               const full = (P.ko.endsWith("다") && P.ko.length >= 2) ? P.ko.slice(-2) : P.ko.slice(-1);
               const short = P.ko.slice(-1);
               const I = new Set([P.ru]);
@@ -636,11 +686,37 @@
             };
 
     /* ─────────── ЭФФЕКТЫ ─────────── */
+    R.useEffect(() => {
+      if (gameMode === "sentence" && t !== "choice") r("choice");
+    }, [gameMode, t]);
 
     // Сброс эмодзи при смене монстра
     R.useEffect(() => {
       setShownEmojis([]);
     }, [z?.id]);
+
+    //dict load effect:
+    R.useEffect(() => {
+      let cancelled = false;
+      async function load() {
+        try {
+          const res = await fetch(
+                  "https://raw.githubusercontent.com/GalievBulat/kor_word_list/main/kor_sentences.json"
+          );
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          const data = await res.json();
+          if (cancelled) return;
+          setSentences(data);
+          setSentencesLoaded(true);
+          console.log("📜 Sentences loaded:", data.length);
+        } catch (e) {
+          console.error("❌ Sentences failed:", e);
+          if (!cancelled) setSentencesLoaded(true);
+        }
+      }
+      load();
+      return () => { cancelled = true; };
+    }, []);
 
     // Загрузка emoji
     R.useEffect(() => {
@@ -735,7 +811,8 @@
 
                   // e / у — эмодзи (en / ru layout)
                   if (I.key === "e" || I.key === "E" || I.key === "у" || I.key === "У") {
-                    setShownEmojis(generateEmojis(z.word.ko, 5));
+                    const key = z.word.targetWord || z.word.ko;
+                    setShownEmojis(generateEmojis(key, 5));
                     hintWordsRef.current.add(z.word.ko);
                   }
 
@@ -781,7 +858,7 @@
         Tt("correct");
         const elapsedMs = performance.now() - Bo;
         setWordStats((s) => {
-          const k = z.word.ko;
+          const k = z.word.targetWord || z.word.ko;
           const prev = s[k] || { correct: 0, wrong: 0, totalTime: 0 };
           return { ...s, [k]: {
               correct: prev.correct + 1,
@@ -946,9 +1023,18 @@
 
         /* Стили */
         y("style", { children: `
-          @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=JetBrains+Mono:wght@500;800&display=swap');
-          .font-kr{font-family:'Black Han Sans', sans-serif}
-          .font-mono{font-family:'JetBrains Mono', monospace}
+          @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+          .font-kr{font-family: "Do Hyeon", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            }
+           @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300..700&family=Do+Hyeon&display=swap');
+          .font-mono{
+            font-family: "Cormorant Garamond", serif;
+              font-optical-sizing: auto;
+              font-weight: 700;
+              font-style: normal;
+          }
           @keyframes bob {0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
           @keyframes slashAnim {0%{transform:translateX(-80px) rotate(-20deg) scaleX(0.2); opacity:0} 40%{opacity:1} 100%{transform:translateX(80px) rotate(15deg) scaleX(1.2); opacity:0}}
           @keyframes shake {0%,100%{transform:translate(0)}20%{transform:translate(-8px,4px)}40%{transform:translate(8px,-4px)}60%{transform:translate(-6px,2px)}80%{transform:translate(6px,-2px)}}
@@ -1167,12 +1253,6 @@
                           className: `h-full transition-all duration-300 ${z.isBoss ? "bg-gradient-to-r from-red-600 to-orange-400" : "bg-gradient-to-r from-emerald-400 to-lime-400"}`,
                           style: { width: `${z.hp / z.maxHp * 100}%` }
                         })
-                      }),
-                      w("div", {
-                        className: "text-[9px] opacity-70",
-                        children: [
-                          z.word.ko, " • ", z.word.len, "자"
-                        ]
                       })
                     ]
                   }),
@@ -1239,8 +1319,20 @@
                           ]}),
 
                         y("div", {
-                          className: "font-kr text-[42px] md:text-[64px] leading-[0.95] tracking-tight text-white drop-shadow-[0_2px_0_#000,0_0_20px_rgba(255,255,255,0.15)]",
+                          className: `font-kr tracking-tight text-white ${
+                                  z?.word.isSentence
+                                          ? "text-[32px] md:text-[42px] leading-[1.3] max-w-full break-words"
+                                          : "text-[42px] md:text-[64px] leading-[0.95]"
+                          } drop-shadow-[0_2px_0_#000,0_0_20px_rgba(255,255,255,0.15)]`,
                           children: z?.word.ko || "로딩..."
+                        }),
+
+                        // for sentence mode, show target word + length hint
+                        z?.word.isSentence && w("div", {
+                          className: "mt-1 flex items-center gap-2 text-[26px] opacity-60",
+                          children: [
+                            y("span", { className: "font-kr", children: `[${z.word.targetWord}]` })
+                          ]
                         }),
 
                         /* Кнопки действий */
@@ -1255,7 +1347,8 @@
                             }),
                             z && y("button", {
                               onClick: () => {
-                                setShownEmojis(generateEmojis(z.word.ko, 5));
+                                const key = z.word.targetWord || z.word.ko;
+                                setShownEmojis(generateEmojis(key, 5));
                                 hintWordsRef.current.add(z.word.ko);
                               },
                               className: "text-[12px] px-2.5 py-1 rounded bg-violet-500/20 border border-violet-400/30 text-violet-200 hover:bg-violet-500/30 transition cursor-pointer",
@@ -1379,9 +1472,18 @@
               }),
               w("div", { className: "grid gap-3 mb-5", children: [
                   y("button", {
-                    onClick: () => { r("choice"); n("playing"); },
+                    onClick: () => { r("choice"); n("playing"); setGameMode("word"); },
                     className: "py-3.5 rounded-[12px] bg-white text-black font-black text-[14px] hover:bg-zinc-200",
-                    children: "СТАРТ"
+                    children: "Выбор слова"
+                  }),
+                  y("button", {
+                    onClick: () => {
+                      r("choice"); n("playing");
+                      sentencesLoaded && setGameMode("sentence")
+                      },
+                    disabled: !sentencesLoaded,
+                    children: sentencesLoaded ? "📜 Предложения" : "⏳ Загрузка…",
+                    className: "py-3.5 rounded-[12px] bg-white text-black font-black text-[14px] hover:bg-zinc-200",
                   })
                 ]}),
               voiceList.length > 1 && y("select", {
