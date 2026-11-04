@@ -31,6 +31,15 @@
     boss:     [`${GIT_ENEMIES}/mid/1.svg`, `${GIT_ENEMIES}/mid/2.svg`, `${GIT_ENEMIES}/mid/3.svg`],
   };
 
+  const MAP_IMG = "https://scontent-arn2-1.xx.fbcdn.net/v/t39.105495-0/888319292_4714786955469076_5426502109851239600_n.webp?_nc_cat=101&ccb=1-7&_nc_sid=5b3566&_nc_ohc=w17IrBhSP_0Q7kNvwHmeW3H&_nc_oc=Adr2txJJ-SyG8xwf_7IsZfVHpHVzKqBC6p_sbywkRdvlyBDzBRNV2NOTl1_7RN9H94I&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_gid=7oy3jDYUlSwlgIHl_9rNeA&_nc_ss=79289&oh=00_AQR-1ViEV8DZThW2IZQ6TP5J0gxOS8mAovdTztQKlKxsYA&oe=6AF0F2AB";
+
+  const LOC_POS = {
+    time_location:{x:15,y:10}, police_location:{x:85,y:18}, town_location:{x:10,y:26},
+    market_location:{x:40,y:31}, hospital_location:{x:30,y:51}, workshop_location:{x:12,y:72},
+    train_station_location:{x:50,y:50}, city_hall_location:{x:70,y:43}, palace_location:{x:82,y:54},
+    library_location:{x:62,y:75}, office_location:{x:88,y:81}, port_location:{x:85,y:93}
+  };
+
   const Ft = [
     { emoji: `${GIT_ENEMIES}/ogre.png`, name: "Огр-Палач", color: "bg-red-700" },
     { emoji: `${GIT_ENEMIES}/dragon.png`, name: "Дракон Акмун", color: "bg-red-900" },
@@ -1081,10 +1090,7 @@
                 w("div", {
                   className: "hidden md:flex items-center gap-2 text-[10px] px-2 py-1 rounded bg-white/10 border border-white/20",
                   children: [
-                    "LV ", l, " • ",
-                    N === 0 ? "⚔️" : N === 1 ? "🔥⚔️" : "💥⚔️",
-                    " ",
-                    ["Меч", "Огненный Клинок", "Лазерный Клинок"][N]
+                    "LV ", l
                   ]
                 })
               ]}),
@@ -1124,19 +1130,6 @@
                   children: "⏸"
                 })
               ]})
-          ]
-        }),
-
-        /* Панель-статистика */
-        w("div", {
-          className: "w-full max-w-[1100px] px-3 md:px-6 flex gap-2 md:gap-3 text-[10px] md:text-xs flex-wrap",
-          children: [
-            w("div", { className: "px-2.5 py-1 rounded-full bg-white/10 border border-white/15", children: ["🗡️ Убито: ", S] }),
-            w("div", { className: "px-2.5 py-1 rounded-full bg-white/10 border border-white/15", children: ["🎯 Точность: ", Xo, "%"] }),
-            w("div", { className: "px-2.5 py-1 rounded-full bg-white/10 border border-white/15", children: ["🔥 Комбо: ", T, " ", T > 2 ? "⚡" : ""] }),
-            w("div", { className: "px-2.5 py-1 rounded-full bg-white/10 border border-white/15", children: ["👹 До мини-босса: ", 10 - Jo, "/10"] }),
-            w("div", { className: "px-2.5 py-1 rounded-full bg-gradient-to-r from-red-900/50 to-purple-900/50 border border-red-500/30", children: ["🏰 До Босса: ", 50 - qo, "/50"] }),
-            w("div", { className: "px-2.5 py-1 rounded-full bg-white/10 border border-white/15", children: ["🌍 ", It.name] })
           ]
         }),
 
@@ -1347,7 +1340,7 @@
 
         /* Нижняя часть: боевая панель */
         w("div", {
-          className: "w-full max-w-[1100px] px-3 md:px-6 mt-3 md:mt-4 pb-6",
+          className: "w-full max-w-[1100px] mt-3 md:mt-4 pb-6",
           children: [
             w("div", {
               className: "rounded-[16px] bg-zinc-900/90 backdrop-blur border border-zinc-700 shadow-[0_10px_40px_rgba(0,0,0,0.6)] overflow-hidden",
@@ -1374,7 +1367,7 @@
                             y("div", { className: "text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-400/30 text-emerald-300", children: "KO" }),
                             w("div", {
                               className: "text-[10px] opacity-50",
-                              children: ["СЛОВО-МОНСТР #", S + 1, " • Длина ", z?.word.len || "?", " • ", It.name]
+                              children: ["МОНСТР ", S + 1, "/150 • ", It.name]
                             })
                           ]}),
 
@@ -1509,17 +1502,15 @@
           children: w("div", {
             className: "w-full max-w-[560px] rounded-[20px] bg-gradient-to-b from-zinc-900 to-black border-2 border-zinc-700 p-6 md:p-8 shadow-[0_30px_120px_rgba(0,0,0,0.9)]",
             children: [
-              y("div", { className: "text-[11px] tracking-[0.3em] opacity-50 mb-3", children: "K-WORD SLAYER • VER 1.0 • 1460 WORDS" }),
+              y("div", { className: "text-[11px] tracking-[0.3em] opacity-50 mb-3", children: "K-WORD SLAYER • VER 1.2" }),
               w("div", {
                 className: "font-kr text-[36px] md:text-[48px] leading-[0.9] mb-3",
-                children: ["Твои 1460 слов", y("br", {}), "превратились в монстров!"]
+                children: ["Title"]
               }),
               w("div", {
                 className: "text-[14px] md:text-[15px] leading-relaxed opacity-80 mb-5",
                 children: [
-                  "Убей их знаниями. Каждый монстр несет корейское слово. Переведи — и твой клинок ударит. Ошибешься — монстр ударит тебя.",
-                  y("br", {}),
-                  "👹 Каждые 10 — мини-босс (2 верных подряд), каждые 50 — ГЛАВНЫЙ БОСС (5 верных подряд + фазы)."
+                  "How to play..."
                 ]
               }),
               w("div", { className: "grid gap-3 mb-5", children: [
@@ -1534,7 +1525,7 @@
                       sentencesLoaded && setGameMode("sentence")
                       },
                     disabled: !sentencesLoaded,
-                    children: sentencesLoaded ? "Предложения" : "⏳ Загрузка…",
+                    children: sentencesLoaded ? "Предложения" : "Загрузка…",
                     className: "py-3.5 rounded-[12px] bg-white text-black font-black text-[14px] hover:bg-zinc-200",
                   })
                 ]}),
@@ -1548,62 +1539,59 @@
               }),
               y("div", {
                 className: "text-[11px] opacity-40 text-center",
-                children: "Словарь слов встроен. Прогресс в этой сессии. Управление: WASD/стрелки, 1-4 для выбора, Enter для ввода."
+                children: "Словарь слов встроен. Прогресс в этой сессии. Управление: 1-4 для выбора."
               })
             ]
           })
         }),
         e === "map_select" && y("div", {
-              className: "fixed inset-0 z-50 bg-black/90 backdrop-blur-[6px] flex items-center justify-center p-4 overflow-y-auto",
-              children: w("div", {
-                className: "w-full max-w-[800px] rounded-[20px] bg-gradient-to-b from-zinc-900 to-black border-2 border-zinc-700 p-6 md:p-8 my-auto",
-                children: [
-                  y("div", { className: "text-center mb-6", children: [
-                      y("div", { className: "text-[11px] tracking-[0.3em] opacity-50 mb-2", children: "ВЫБОР ЛОКАЦИИ" }),
-                      y("div", { className: "font-kr text-[28px] md:text-[36px] text-yellow-200 drop-shadow-[0_2px_0_#000]", children: "Куда отправимся?" })
-                    ]}),
+          className: "fixed inset-0 z-50 bg-black/90 backdrop-blur-[6px] flex items-center justify-center p-4",
+          children: w("div", {
+            className: "relative rounded-[20px] overflow-hidden border border-white/10 bg-black shadow-[0_20px_80px_rgba(0,0,0,0.8)] inline-block",
+            children: [
+              y("img", {
+                src: MAP_IMG,
+                className: "block max-h-[80vh] max-w-full w-auto h-auto",
+                alt: "Map"
+              }),
+              ...Mr.map(loc => {
+                const p = LOC_POS[loc.id];
+                if (!p) return null;
 
-                  w("div", { className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3", children:
-                            Mr.map(loc => {
-                              const count = fullDict[loc.id] ? Object.keys(fullDict[loc.id]).length : 0;
-                              return y("button", {
-                                onClick: () => {
-                                  const locDict = fullDict[loc.id];
-                                  if (!locDict) return;
-
-                                  for (const k in zh) {
-                                    delete zh[k];
-                                  }
-                                  Mf.length = 0;
-                                  Object.keys(locDict).forEach(k => {
-                                    zh[k] = locDict[k];
-                                    Mf.push(k);
-                                  });
-                                  setSelectedLocation(loc.id);
-                                  Zo();
-                                },
-                                disabled: count === 0,
-                                className: `py-4 px-4 rounded-[12px] border-2 transition text-left relative group ${
-                                        count === 0
-                                                ? "bg-zinc-900 border-zinc-800 opacity-50 cursor-not-allowed"
-                                                : "bg-zinc-800 border-zinc-700 hover:bg-zinc-700 hover:border-white/40"
-                                }`,
-                                children: [
-                                    y("div", { className: "font-bold text-[14px] text-white mb-1 leading-tight", children: loc.name }),
-                                    y("div", { className: "text-[10px] opacity-50", children: count > 0 ? `${count} слов` : "Нет слов" })
-                                  ]
-                                });
-                              })
+                return y("button", {
+                  key: loc.id,
+                  className: "absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1.5 group z-10",
+                  style: { left: `${p.x}%`, top: `${p.y}%` },
+                  onClick: () => {
+                    const locDict = fullDict[loc.id];
+                    if (!locDict) return;
+                    for (const k in zh) delete zh[k];
+                    Mf.length = 0;
+                    Object.keys(locDict).forEach(k => {
+                      zh[k] = locDict[k];
+                      Mf.push(k);
+                    });
+                    setSelectedLocation(loc.id);
+                    Zo();
+                  },
+                  children: [
+                    y("span", {
+                      className: "w-3 h-3 rounded-full bg-[#ffe600] shadow-[0_0_12px_#ffe600] group-hover:scale-125 group-active:scale-90 transition-transform"
                     }),
-                    w("div", { className: "mt-6 flex justify-center", children: [
-                      y("button", {
-                        onClick: () => n("onboard"),
-                        className: "px-6 py-3 rounded-[12px] bg-zinc-900 border border-zinc-700 text-white/50 hover:text-white hover:bg-zinc-800 transition font-bold text-[13px]",
-                        children: "← В МЕНЮ"
-                      })
-                    ]})
-                ]
+                    y("span", {
+                      className: "px-2.5 py-1 rounded-full bg-black/80 backdrop-blur text-[12px] font-bold tracking-wide text-white border border-white/20 group-hover:bg-black group-hover:border-[#ffe600]/50 transition-colors whitespace-nowrap",
+                      children: loc.name  // ⬅ вот так
+                    }),
+                  ]
+                });
+              }),
+              y("button", {
+                onClick: () => n("onboard"),
+                className: "absolute top-4 left-4 z-20 px-3 py-1.5 rounded bg-black/70 border border-white/20 text-white/70 hover:text-white transition text-[12px] font-bold",
+                children: "← В МЕНЮ"
               })
+            ]
+          })
         }),
 
         /* ═══════════ PAUSED ═══════════ */
@@ -1613,7 +1601,19 @@
             className: "w-full max-w-[420px] rounded-[18px] bg-zinc-900 border border-zinc-700 p-6 text-center",
             children: [
               y("div", { className: "text-[28px] font-black mb-2", children: "⏸️ ПАУЗА" }),
-              w("div", { className: "text-[12px] opacity-60 mb-5", children: ["Ты в ", It.name, ", убито ", S, ". Комбо ", T, ", уровень ", l, "."] }),
+              /* Панель-статистика */
+              w("div", {
+                className: "mb-3 w-full max-w-[1100px] px-3 md:px-6 flex gap-2 md:gap-3 text-[10px] md:text-xs flex-wrap",
+                children: [
+                  w("div", { className: "px-2.5 py-1 rounded-full bg-white/10 border border-white/15", children: ["🗡️ Убито: ", S] }),
+                  w("div", { className: "px-2.5 py-1 rounded-full bg-white/10 border border-white/15", children: ["🎯 Точность: ", Xo, "%"] }),
+                  w("div", { className: "px-2.5 py-1 rounded-full bg-white/10 border border-white/15", children: ["🔥 Комбо: ", T, " ", T > 2 ? "⚡" : ""] }),
+                  w("div", { className: "px-2.5 py-1 rounded-full bg-white/10 border border-white/15", children: ["👹 До мини-босса: ", 10 - Jo, "/10"] }),
+                  w("div", { className: "px-2.5 py-1 rounded-full bg-gradient-to-r from-red-900/50 to-purple-900/50 border border-red-500/30", children: ["🏰 До Босса: ", 50 - qo, "/50"] }),
+                  w("div", { className: "px-2.5 py-1 rounded-full bg-white/10 border border-white/15", children: ["🌍 ", It.name] })
+                ]
+              }),
+
               w("div", { className: "grid grid-cols-2 gap-3", children: [
                   y("button", { onClick: () => n("playing"), className: "py-3 rounded-[12px] bg-white text-black font-black", children: "ПРОДОЛЖИТЬ" }),
                   y("button", { onClick: Zo, className: "py-3 rounded-[12px] bg-zinc-800 border border-zinc-600 font-bold", children: "РЕСТАРТ" })
