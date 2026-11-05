@@ -34,9 +34,9 @@
   const MAP_IMG = "https://scontent-arn2-1.xx.fbcdn.net/v/t39.105495-0/888319292_4714786955469076_5426502109851239600_n.webp?_nc_cat=101&ccb=1-7&_nc_sid=5b3566&_nc_ohc=w17IrBhSP_0Q7kNvwHmeW3H&_nc_oc=Adr2txJJ-SyG8xwf_7IsZfVHpHVzKqBC6p_sbywkRdvlyBDzBRNV2NOTl1_7RN9H94I&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_gid=7oy3jDYUlSwlgIHl_9rNeA&_nc_ss=79289&oh=00_AQR-1ViEV8DZThW2IZQ6TP5J0gxOS8mAovdTztQKlKxsYA&oe=6AF0F2AB";
 
   const LOC_POS = {
-    time_location:{x:15,y:10}, police_location:{x:85,y:18}, town_location:{x:10,y:26},
+    time_location:{x:20,y:15}, police_location:{x:85,y:18}, town_location:{x:10,y:26},
     market_location:{x:40,y:31}, hospital_location:{x:30,y:51}, workshop_location:{x:12,y:72},
-    train_station_location:{x:50,y:50}, city_hall_location:{x:70,y:43}, palace_location:{x:82,y:54},
+    train_station_location:{x:55,y:50}, city_hall_location:{x:70,y:43}, palace_location:{x:82,y:54},
     library_location:{x:62,y:75}, office_location:{x:88,y:81}, port_location:{x:85,y:93}
   };
 
@@ -1051,7 +1051,8 @@
         /* Стили */
         y("style", { children: `
           @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
-          .font-kr{font-family: "Do Hyeon", sans-serif;
+          .font-kr{
+            font-family: "Do Hyeon", sans-serif;
             font-weight: 400;
             font-style: normal;
             }
@@ -1073,7 +1074,7 @@
           .pixel-btn:active{transform:translateY(2px)}
           @keyframes bgScroll {
             from { background-position: 0px bottom; }
-            to { background-position: -2000px bottom; }
+            to { background-position: -200000px bottom; }
           }
           .animate-bob{animation:bob 1.2s ease-in-out infinite}
           .animate-shake{animation:shake 0.35s ease-in-out}
@@ -1148,13 +1149,13 @@
                     w("div", {
                       className: "absolute inset-0 pointer-events-none select-none overflow-hidden",
                       style: {
-
+                        height: "80%",
                         backgroundImage: `url(
                         "https://raw.githubusercontent.com/GalievBulat/kor_word_list/main/pictures/locations/temple_background.svg"
                         )`,
                         backgroundSize: "auto 100%",
                         backgroundRepeat: "repeat-x",
-                        animation: "bgScroll 120s linear infinite",
+                        animation: "bgScroll 12000s linear infinite",
                         animationPlayState: e === "playing" ? "running" : "paused",
                       }
                     }),
@@ -1249,7 +1250,7 @@
                 className: `relative ${In === "correct" ? "-translate-x-8 scale-90 opacity-80" : ""} transition-all duration-300`,
                 children: [
                   y("div", { className: "absolute -bottom-1 left-1/2 -translate-x-1/2 w-20 h-4 bg-black/70 rounded-full blur-[4px]" }),
-                  y("div", {
+                  y("div",  {
                     className: `text-[64px] md:text-[84px] leading-none animate-bob drop-shadow-[0_8px_20px_rgba(0,0,0,0.9)] ${z.isBoss ? "scale-[1.15]" : ""}`,
                     style: { filter: z.isBoss ? "drop-shadow(0 0 18px rgba(255,0,0,0.6))" : "" },
                     children: w("div", {
@@ -1560,7 +1561,7 @@
 
                 return y("button", {
                   key: loc.id,
-                  className: "absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1.5 group z-10",
+                  className: "absolute -translate-x-1/2 -translate-y-1/2 flex flex-row items-center gap-2 group z-10",
                   style: { left: `${p.x}%`, top: `${p.y}%` },
                   onClick: () => {
                     const locDict = fullDict[loc.id];
@@ -1576,12 +1577,22 @@
                   },
                   children: [
                     y("span", {
-                      className: "w-3 h-3 rounded-full bg-[#ffe600] shadow-[0_0_12px_#ffe600] group-hover:scale-125 group-active:scale-90 transition-transform"
+                      style: {
+                        display: "block",
+                        width: "10px",
+                        height: "10px",
+                        minWidth: "10px",
+                        minHeight: "10px",
+                        borderRadius: "50%",
+                        backgroundColor: "#ffe600",
+                        boxShadow: "0 0 10px #ffe600",
+                        flexShrink: 0,
+                      }
                     }),
                     y("span", {
-                      className: "px-2.5 py-1 rounded-full bg-black/80 backdrop-blur text-[12px] font-bold tracking-wide text-white border border-white/20 group-hover:bg-black group-hover:border-[#ffe600]/50 transition-colors whitespace-nowrap",
-                      children: loc.name  // ⬅ вот так
-                    }),
+                      className: "opacity-80 px-1.5 py-0.5 md:px-2.5 md:py-1 rounded-full bg-black/70 backdrop-blur text-[9px] md:text-[12px] font-bold tracking-wide text-white border border-white/15 whitespace-nowrap",
+                      children: loc.name
+                    })
                   ]
                 });
               }),
