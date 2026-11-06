@@ -37,7 +37,7 @@
     time_location:{x:20,y:15}, police_location:{x:85,y:18}, town_location:{x:10,y:26},
     market_location:{x:40,y:31}, hospital_location:{x:30,y:51}, workshop_location:{x:12,y:72},
     train_station_location:{x:55,y:50}, city_hall_location:{x:70,y:43}, palace_location:{x:82,y:54},
-    library_location:{x:62,y:75}, office_location:{x:88,y:81}, port_location:{x:85,y:93}
+    library_location:{x:62,y:75}, office_location:{x:88,y:81}, port_location:{x:85,y:93}, podcast_location:{x:55,y:23}
   };
 
   const Ft = [
@@ -424,15 +424,15 @@
                 id: "time_location",
               },
               {
-                name: "Управление Последнего Следа",
+                name: "Застава Последнего Следа",
                 id: "police_location",
               },
               {
-                name: "Переулок Пустых Окон",
+                name: "Переулок Выбитых Окон",
                 id: "town_location",
               },
               {
-                name: "Рынок Алхимика",
+                name: "Базар Алхимика",
                 id: "market_location",
               },
               {
@@ -444,28 +444,32 @@
                 id: "workshop_location",
               },
               {
-                name: "Станция Последнего Поезда",
+                name: "Станция Мёртвых Путей",
                 id: "train_station_location",
               },
               {
-                name: "Дворец Последнего Чувства",
+                name: "Чертог Истлевших Страстей",
                 id: "palace_location",
               },
               {
-                name: "Дом Печатей",
+                name: "Палата Семи Печатей",
                 id: "city_hall_location",
               },
               {
-                name: "Библиотека Забытых Имён",
+                name: "Архив Забытых Имён",
                 id: "library_location",
               },
               {
-                name: "Гильдия Договоров",
+                name: "Гильдия Тёмных Договоров",
                 id: "office_location",
               },
               {
-                name: "Гавань Странников",
+                name: "Гавань Утопленников",
                 id: "port_location",
+              },
+              {
+                name: "Чертог Глашатаев",
+                id: "podcast_location",
               },
             ], []),
 
@@ -1547,6 +1551,9 @@
         }),
         e === "map_select" && y("div", {
           className: "fixed inset-0 z-50 bg-black/90 backdrop-blur-[6px] flex items-center justify-center p-4",
+          style: {
+            overflow: "scroll"
+          },
           children: w("div", {
             className: "relative rounded-[20px] overflow-hidden border border-white/10 bg-black shadow-[0_20px_80px_rgba(0,0,0,0.8)] inline-block",
             children: [

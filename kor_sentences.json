@@ -30410,5 +30410,1005 @@
       { "text": "Я купил витамины.", "correct": false },
       { "text": "Я потерял витамины.", "correct": false }
     ]
+  },
+  {
+    "target_word": "안내문",
+    "sentence_ko": "입구에 안내문이 붙어 있다.",
+    "options": [
+      { "text": "На входе висит объявление.", "correct": true },
+      { "text": "На входе висит фотография.", "correct": false },
+      { "text": "На входе висит картина.", "correct": false },
+      { "text": "На входе висит зеркало.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "건네주다",
+    "sentence_ko": "그는 나에게 책을 건네주었다.",
+    "options": [
+      { "text": "Он передал мне книгу.", "correct": true },
+      { "text": "Он забрал у меня книгу.", "correct": false },
+      { "text": "Он потерял мою книгу.", "correct": false },
+      { "text": "Он купил мне книгу.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "적다",
+    "sentence_ko": "공책에 이름을 적었다.",
+    "options": [
+      { "text": "Я записал имя в тетрадь.", "correct": true },
+      { "text": "Я стёр имя из тетради.", "correct": false },
+      { "text": "Я прочитал имя в тетради.", "correct": false },
+      { "text": "Я порвал тетрадь.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "눈짓",
+    "sentence_ko": "그는 눈짓으로 나가라고 했다.",
+    "options": [
+      { "text": "Он взглядом дал знак выйти.", "correct": true },
+      { "text": "Он голосом сказал выйти.", "correct": false },
+      { "text": "Он рукой показал выйти.", "correct": false },
+      { "text": "Он написал записку выйти.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "낭독",
+    "sentence_ko": "선생님이 시를 낭독했다.",
+    "options": [
+      { "text": "Учитель прочитал стихотворение вслух.", "correct": true },
+      { "text": "Учитель написал стихотворение.", "correct": false },
+      { "text": "Учитель выучил стихотворение.", "correct": false },
+      { "text": "Учитель забыл стихотворение.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "실존주의",
+    "sentence_ko": "그는 실존주의 철학을 공부한다.",
+    "options": [
+      { "text": "Он изучает философию экзистенциализма.", "correct": true },
+      { "text": "Он изучает философию буддизма.", "correct": false },
+      { "text": "Он изучает философию конфуцианства.", "correct": false },
+      { "text": "Он изучает философию стоицизма.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "몸짓",
+    "sentence_ko": "그의 몸짓이 재미있었다.",
+    "options": [
+      { "text": "Его жесты были забавными.", "correct": true },
+      { "text": "Его слова были забавными.", "correct": false },
+      { "text": "Его мысли были забавными.", "correct": false },
+      { "text": "Его одежда была забавной.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "해석",
+    "sentence_ko": "이 문장의 해석이 어렵다.",
+    "options": [
+      { "text": "Толкование этого предложения трудное.", "correct": true },
+      { "text": "Перевод этого предложения трудный.", "correct": false },
+      { "text": "Произношение этого предложения трудное.", "correct": false },
+      { "text": "Написание этого предложения трудное.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "고이",
+    "sentence_ko": "그는 편지를 고이 간직했다.",
+    "options": [
+      { "text": "Он бережно хранил письмо.", "correct": true },
+      { "text": "Он выбросил письмо.", "correct": false },
+      { "text": "Он порвал письмо.", "correct": false },
+      { "text": "Он потерял письмо.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "가시다",
+    "sentence_ko": "손님이 가신 후에 집을 청소했다.",
+    "options": [
+      { "text": "После ухода гостя я убрал дом.", "correct": true },
+      { "text": "До прихода гостя я убрал дом.", "correct": false },
+      { "text": "Во время визита гостя я убрал дом.", "correct": false },
+      { "text": "Вместо гостя я убрал дом.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "연말",
+    "sentence_ko": "연말에 가족과 시간을 보냈다.",
+    "options": [
+      { "text": "В конце года я провёл время с семьёй.", "correct": true },
+      { "text": "В начале года я провёл время с семьёй.", "correct": false },
+      { "text": "Летом я провёл время с семьёй.", "correct": false },
+      { "text": "В отпуске я провёл время с семьёй.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "소소하다",
+    "sentence_ko": "소소한 일상이 행복이다.",
+    "options": [
+      { "text": "Скромная повседневность — это счастье.", "correct": true },
+      { "text": "Большие события — это счастье.", "correct": false },
+      { "text": "Богатство — это счастье.", "correct": false },
+      { "text": "Слава — это счастье.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "예매",
+    "sentence_ko": "공연 티켓을 예매했다.",
+    "options": [
+      { "text": "Я заранее забронировал билет на концерт.", "correct": true },
+      { "text": "Я купил билет на концерт в кассе.", "correct": false },
+      { "text": "Я потерял билет на концерт.", "correct": false },
+      { "text": "Я продал билет на концерт.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "전송",
+    "sentence_ko": "파일 전송이 완료되었다.",
+    "options": [
+      { "text": "Передача файла завершена.", "correct": true },
+      { "text": "Удаление файла завершено.", "correct": false },
+      { "text": "Сохранение файла завершено.", "correct": false },
+      { "text": "Открытие файла завершено.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "매진",
+    "sentence_ko": "표가 모두 매진되었다.",
+    "options": [
+      { "text": "Все билеты распроданы.", "correct": true },
+      { "text": "Все билеты возвращены.", "correct": false },
+      { "text": "Все билеты подешевели.", "correct": false },
+      { "text": "Все билеты потеряны.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "취소",
+    "sentence_ko": "비 때문에 여행을 취소했다.",
+    "options": [
+      { "text": "Из-за дождя я отменил поездку.", "correct": true },
+      { "text": "Из-за дождя я перенёс поездку.", "correct": false },
+      { "text": "Из-за дождя я начал поездку.", "correct": false },
+      { "text": "Из-за дождя я продолжил поездку.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "기간",
+    "sentence_ko": "신청 기간은 일주일이다.",
+    "options": [
+      { "text": "Срок подачи заявки — одна неделя.", "correct": true },
+      { "text": "Место подачи заявки — одна неделя.", "correct": false },
+      { "text": "Цена подачи заявки — одна неделя.", "correct": false },
+      { "text": "Причина подачи заявки — одна неделя.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "의도",
+    "sentence_ko": "그의 의도를 알 수 없었다.",
+    "options": [
+      { "text": "Нельзя было понять его намерение.", "correct": true },
+      { "text": "Нельзя было понять его имя.", "correct": false },
+      { "text": "Нельзя было понять его возраст.", "correct": false },
+      { "text": "Нельзя было понять его адрес.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "단체",
+    "sentence_ko": "단체로 여행을 갔다.",
+    "options": [
+      { "text": "Мы поехали в поездку группой.", "correct": true },
+      { "text": "Мы поехали в поездку поодиночке.", "correct": false },
+      { "text": "Мы поехали в поездку с семьёй.", "correct": false },
+      { "text": "Мы поехали в поездку с собакой.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "조명",
+    "sentence_ko": "무대 조명이 밝다.",
+    "options": [
+      { "text": "Сценическое освещение яркое.", "correct": true },
+      { "text": "Сценическая музыка громкая.", "correct": false },
+      { "text": "Сценический костюм красивый.", "correct": false },
+      { "text": "Сценическая площадка большая.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "장비",
+    "sentence_ko": "등산 장비를 준비했다.",
+    "options": [
+      { "text": "Я подготовил снаряжение для похода в горы.", "correct": true },
+      { "text": "Я подготовил еду для похода в горы.", "correct": false },
+      { "text": "Я подготовил билеты для похода в горы.", "correct": false },
+      { "text": "Я подготовил карту для похода в горы.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "살펴보다",
+    "sentence_ko": "그는 서류를 꼼꼼히 살펴보았다.",
+    "options": [
+      { "text": "Он внимательно просмотрел документы.", "correct": true },
+      { "text": "Он быстро порвал документы.", "correct": false },
+      { "text": "Он выбросил документы.", "correct": false },
+      { "text": "Он подписал документы не читая.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "평생",
+    "sentence_ko": "그는 평생 교육자로 살았다.",
+    "options": [
+      { "text": "Он всю жизнь прожил педагогом.", "correct": true },
+      { "text": "Он год прожил педагогом.", "correct": false },
+      { "text": "Он месяц прожил педагогом.", "correct": false },
+      { "text": "Он день прожил педагогом.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "서론",
+    "sentence_ko": "보고서의 서론을 작성했다.",
+    "options": [
+      { "text": "Я написал введение к докладу.", "correct": true },
+      { "text": "Я написал заключение к докладу.", "correct": false },
+      { "text": "Я написал приложение к докладу.", "correct": false },
+      { "text": "Я написал сноску к докладу.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "원인",
+    "sentence_ko": "사고 원인을 조사하고 있다.",
+    "options": [
+      { "text": "Расследуется причина аварии.", "correct": true },
+      { "text": "Расследуется результат аварии.", "correct": false },
+      { "text": "Расследуется место аварии.", "correct": false },
+      { "text": "Расследуется время аварии.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "주어",
+    "sentence_ko": "이 문장의 주어는 무엇입니까?",
+    "options": [
+      { "text": "Что является подлежащим в этом предложении?", "correct": true },
+      { "text": "Что является сказуемым в этом предложении?", "correct": false },
+      { "text": "Что является дополнением в этом предложении?", "correct": false },
+      { "text": "Что является определением в этом предложении?", "correct": false }
+    ]
+  },
+  {
+    "target_word": "문맥",
+    "sentence_ko": "문맥을 고려해야 정확히 이해할 수 있다.",
+    "options": [
+      { "text": "Нужно учитывать контекст, чтобы точно понять.", "correct": true },
+      { "text": "Нужно учитывать грамматику, чтобы точно понять.", "correct": false },
+      { "text": "Нужно учитывать произношение, чтобы точно понять.", "correct": false },
+      { "text": "Нужно учитывать интонацию, чтобы точно понять.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "시키다",
+    "sentence_ko": "어머니가 아이에게 심부름을 시켰다.",
+    "options": [
+      { "text": "Мать поручила ребёнку дело.", "correct": true },
+      { "text": "Мать помогла ребёнку с делом.", "correct": false },
+      { "text": "Мать запретила ребёнку дело.", "correct": false },
+      { "text": "Мать забыла о деле ребёнка.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "예측하다",
+    "sentence_ko": "경제 전문가가 미래를 예측했다.",
+    "options": [
+      { "text": "Экономист предсказал будущее.", "correct": true },
+      { "text": "Экономист забыл будущее.", "correct": false },
+      { "text": "Экономист изменил будущее.", "correct": false },
+      { "text": "Экономист создал будущее.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "등장인물",
+    "sentence_ko": "소설의 등장인물이 많다.",
+    "options": [
+      { "text": "В романе много персонажей.", "correct": true },
+      { "text": "В романе много страниц.", "correct": false },
+      { "text": "В романе много глав.", "correct": false },
+      { "text": "В романе много ошибок.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "겁먹다",
+    "sentence_ko": "아이가 어둠을 겁먹었다.",
+    "options": [
+      { "text": "Ребёнок испугался темноты.", "correct": true },
+      { "text": "Ребёнок полюбил темноту.", "correct": false },
+      { "text": "Ребёнок привык к темноте.", "correct": false },
+      { "text": "Ребёнок забыл о темноте.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "상대방",
+    "sentence_ko": "상대방의 의견을 존중해야 한다.",
+    "options": [
+      { "text": "Нужно уважать мнение другой стороны.", "correct": true },
+      { "text": "Нужно игнорировать мнение другой стороны.", "correct": false },
+      { "text": "Нужно высмеивать мнение другой стороны.", "correct": false },
+      { "text": "Нужно забыть мнение другой стороны.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "맞장구",
+    "sentence_ko": "그는 항상 상사의 말에 맞장구를 친다.",
+    "options": [
+      { "text": "Он всегда поддакивает начальнику.", "correct": true },
+      { "text": "Он всегда спорит с начальником.", "correct": false },
+      { "text": "Он всегда игнорирует начальника.", "correct": false },
+      { "text": "Он всегда перебивает начальника.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "답답하다",
+    "sentence_ko": "방이 좁아서 답답하다.",
+    "options": [
+      { "text": "Комната тесная, поэтому душно.", "correct": true },
+      { "text": "Комната большая, поэтому просторно.", "correct": false },
+      { "text": "Комната светлая, поэтому светло.", "correct": false },
+      { "text": "Комната чистая, поэтому приятно.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "부정적",
+    "sentence_ko": "그는 부정적인 생각을 많이 한다.",
+    "options": [
+      { "text": "У него много негативных мыслей.", "correct": true },
+      { "text": "У него много позитивных мыслей.", "correct": false },
+      { "text": "У него много новых мыслей.", "correct": false },
+      { "text": "У него много интересных мыслей.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "어쩔 수 없다",
+    "sentence_ko": "비가 오면 어쩔 수 없다.",
+    "options": [
+      { "text": "Если пойдёт дождь, ничего не поделаешь.", "correct": true },
+      { "text": "Если пойдёт дождь, мы всё изменим.", "correct": false },
+      { "text": "Если пойдёт дождь, мы отменим всё.", "correct": false },
+      { "text": "Если пойдёт дождь, мы будем рады.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "예문",
+    "sentence_ko": "선생님이 예문을 설명했다.",
+    "options": [
+      { "text": "Учитель объяснил пример предложения.", "correct": true },
+      { "text": "Учитель объяснил правило грамматики.", "correct": false },
+      { "text": "Учитель объяснил новое слово.", "correct": false },
+      { "text": "Учитель объяснил домашнее задание.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "욕",
+    "sentence_ko": "그는 화가 나서 욕을 했다.",
+    "options": [
+      { "text": "Он рассердился и выругался.", "correct": true },
+      { "text": "Он рассердился и заплакал.", "correct": false },
+      { "text": "Он рассердился и засмеялся.", "correct": false },
+      { "text": "Он рассердился и ушёл.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "장학금",
+    "sentence_ko": "그는 장학금을 받았다.",
+    "options": [
+      { "text": "Он получил стипендию.", "correct": true },
+      { "text": "Он получил штраф.", "correct": false },
+      { "text": "Он получил кредит.", "correct": false },
+      { "text": "Он получил подарок.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "열연",
+    "sentence_ko": "배우의 열연이 관객을 감동시켰다.",
+    "options": [
+      { "text": "Страстная игра актёра тронула зрителей.", "correct": true },
+      { "text": "Холодная игра актёра рассмешила зрителей.", "correct": false },
+      { "text": "Слабая игра актёра разочаровала зрителей.", "correct": false },
+      { "text": "Короткая игра актёра удивила зрителей.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "늘리다",
+    "sentence_ko": "운동 시간을 늘렸다.",
+    "options": [
+      { "text": "Я увеличил время тренировки.", "correct": true },
+      { "text": "Я сократил время тренировки.", "correct": false },
+      { "text": "Я отменил тренировку.", "correct": false },
+      { "text": "Я забыл о тренировке.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "이별",
+    "sentence_ko": "이별은 항상 슬프다.",
+    "options": [
+      { "text": "Расставание всегда грустное.", "correct": true },
+      { "text": "Встреча всегда грустная.", "correct": false },
+      { "text": "Свадьба всегда грустная.", "correct": false },
+      { "text": "Праздник всегда грустный.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "중간",
+    "sentence_ko": "중간에 앉으세요.",
+    "options": [
+      { "text": "Садитесь посередине.", "correct": true },
+      { "text": "Садитесь впереди.", "correct": false },
+      { "text": "Садитесь сзади.", "correct": false },
+      { "text": "Садитесь сбоку.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "억양",
+    "sentence_ko": "그의 억양이 독특하다.",
+    "options": [
+      { "text": "У него своеобразная интонация.", "correct": true },
+      { "text": "У него своеобразный голос.", "correct": false },
+      { "text": "У него своеобразный акцент.", "correct": false },
+      { "text": "У него своеобразный темп речи.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "반복하다",
+    "sentence_ko": "같은 실수를 반복하지 마세요.",
+    "options": [
+      { "text": "Не повторяйте ту же ошибку.", "correct": true },
+      { "text": "Не исправляйте ту же ошибку.", "correct": false },
+      { "text": "Не замечайте ту же ошибку.", "correct": false },
+      { "text": "Не забывайте ту же ошибку.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "흑백",
+    "sentence_ko": "흑백 사진이 분위기 있다.",
+    "options": [
+      { "text": "Чёрно-белая фотография атмосферная.", "correct": true },
+      { "text": "Цветная фотография атмосферная.", "correct": false },
+      { "text": "Старая фотография атмосферная.", "correct": false },
+      { "text": "Новая фотография атмосферная.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "진득하다",
+    "sentence_ko": "그는 진득하게 공부한다.",
+    "options": [
+      { "text": "Он усидчиво учится.", "correct": true },
+      { "text": "Он быстро учится.", "correct": false },
+      { "text": "Он лениво учится.", "correct": false },
+      { "text": "Он редко учится.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "초능력",
+    "sentence_ko": "그는 초능력이 있다고 믿는다.",
+    "options": [
+      { "text": "Он верит, что у него есть суперспособность.", "correct": true },
+      { "text": "Он верит, что у него есть болезнь.", "correct": false },
+      { "text": "Он верит, что у него есть талант.", "correct": false },
+      { "text": "Он верит, что у него есть удача.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "새삼",
+    "sentence_ko": "그의 노력을 새삼 느꼈다.",
+    "options": [
+      { "text": "Я заново осознал его усилия.", "correct": true },
+      { "text": "Я забыл о его усилиях.", "correct": false },
+      { "text": "Я преуменьшил его усилия.", "correct": false },
+      { "text": "Я высмеял его усилия.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "요모조모",
+    "sentence_ko": "그는 집을 요모조모 살펴보았다.",
+    "options": [
+      { "text": "Он осмотрел дом со всех сторон.", "correct": true },
+      { "text": "Он быстро покинул дом.", "correct": false },
+      { "text": "Он купил дом не глядя.", "correct": false },
+      { "text": "Он построил новый дом.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "녹화하다",
+    "sentence_ko": "드라마를 녹화했다.",
+    "options": [
+      { "text": "Я записал драму на видео.", "correct": true },
+      { "text": "Я посмотрел драму в кино.", "correct": false },
+      { "text": "Я прочитал драму в книге.", "correct": false },
+      { "text": "Я обсудил драму с другом.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "겨우",
+    "sentence_ko": "겨우 버스에 탔다.",
+    "options": [
+      { "text": "Я едва успел на автобус.", "correct": true },
+      { "text": "Я легко успел на автобус.", "correct": false },
+      { "text": "Я опоздал на автобус.", "correct": false },
+      { "text": "Я не поехал на автобусе.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "젖다",
+    "sentence_ko": "비를 맞아서 옷이 젖었다.",
+    "options": [
+      { "text": "Я попал под дождь, и одежда намокла.", "correct": true },
+      { "text": "Я попал под дождь, и одежда высохла.", "correct": false },
+      { "text": "Я попал под дождь, и одежда порвалась.", "correct": false },
+      { "text": "Я попал под дождь, и одежда испачкалась.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "평형",
+    "sentence_ko": "그는 평형으로 수영한다.",
+    "options": [
+      { "text": "Он плавает брассом.", "correct": true },
+      { "text": "Он плавает кролем.", "correct": false },
+      { "text": "Он плавает на спине.", "correct": false },
+      { "text": "Он плавает баттерфляем.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "정답다",
+    "sentence_ko": "그의 대답은 정답다.",
+    "options": [
+      { "text": "Его ответ правильный.", "correct": true },
+      { "text": "Его ответ странный.", "correct": false },
+      { "text": "Его ответ длинный.", "correct": false },
+      { "text": "Его ответ грубый.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "일과",
+    "sentence_ko": "아침 일과를 시작했다.",
+    "options": [
+      { "text": "Я начал утренний распорядок.", "correct": true },
+      { "text": "Я закончил утренний распорядок.", "correct": false },
+      { "text": "Я отменил утренний распорядок.", "correct": false },
+      { "text": "Я забыл утренний распорядок.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "종종",
+    "sentence_ko": "그는 종종 늦게 온다.",
+    "options": [
+      { "text": "Он часто приходит поздно.", "correct": true },
+      { "text": "Он никогда не приходит поздно.", "correct": false },
+      { "text": "Он всегда приходит рано.", "correct": false },
+      { "text": "Он редко приходит.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "고급스럽다",
+    "sentence_ko": "이 식당은 고급스럽다.",
+    "options": [
+      { "text": "Этот ресторан роскошный.", "correct": true },
+      { "text": "Этот ресторан дешёвый.", "correct": false },
+      { "text": "Этот ресторан шумный.", "correct": false },
+      { "text": "Этот ресторан маленький.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "전문적",
+    "sentence_ko": "그는 전문적인 조언을 해 주었다.",
+    "options": [
+      { "text": "Он дал профессиональный совет.", "correct": true },
+      { "text": "Он дал шуточный совет.", "correct": false },
+      { "text": "Он дал вредный совет.", "correct": false },
+      { "text": "Он дал запоздалый совет.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "도구",
+    "sentence_ko": "요리할 때 여러 도구가 필요하다.",
+    "options": [
+      { "text": "При готовке нужно много инструментов.", "correct": true },
+      { "text": "При готовке нужно много продуктов.", "correct": false },
+      { "text": "При готовке нужно много времени.", "correct": false },
+      { "text": "При готовке нужно много людей.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "어차피",
+    "sentence_ko": "어차피 늦었으니 천천히 가자.",
+    "options": [
+      { "text": "Всё равно уже поздно, пойдём не спеша.", "correct": true },
+      { "text": "Хорошо, что уже поздно, пойдём быстро.", "correct": false },
+      { "text": "Если уже поздно, не пойдём.", "correct": false },
+      { "text": "Хотя уже поздно, пойдём быстрее.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "승마",
+    "sentence_ko": "주말에 승마를 배웠다.",
+    "options": [
+      { "text": "На выходных я учился верховой езде.", "correct": true },
+      { "text": "На выходных я учился плаванию.", "correct": false },
+      { "text": "На выходных я учился бегу.", "correct": false },
+      { "text": "На выходных я учился теннису.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "독서",
+    "sentence_ko": "취미는 독서다.",
+    "options": [
+      { "text": "Моё хобби — чтение книг.", "correct": true },
+      { "text": "Моё хобби — рисование.", "correct": false },
+      { "text": "Моё хобби — музыка.", "correct": false },
+      { "text": "Моё хобби — спорт.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "오히려",
+    "sentence_ko": "그는 화를 내지 않고 오히려 웃었다.",
+    "options": [
+      { "text": "Он не рассердился, а наоборот, засмеялся.", "correct": true },
+      { "text": "Он рассердился и засмеялся.", "correct": false },
+      { "text": "Он не рассердился и не засмеялся.", "correct": false },
+      { "text": "Он рассердился и ушёл.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "핵심",
+    "sentence_ko": "이 문제의 핵심은 신뢰다.",
+    "options": [
+      { "text": "Суть этой проблемы — доверие.", "correct": true },
+      { "text": "Цена этой проблемы — доверие.", "correct": false },
+      { "text": "Причина этой проблемы — доверие.", "correct": false },
+      { "text": "Результат этой проблемы — доверие.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "들통",
+    "sentence_ko": "그의 거짓말이 결국 들통이 났다.",
+    "options": [
+      { "text": "Его ложь в конце концов раскрылась.", "correct": true },
+      { "text": "Его ложь в конце концов забылась.", "correct": false },
+      { "text": "Его ложь в конце концов повторилась.", "correct": false },
+      { "text": "Его ложь в конце концов исчезла.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "언급",
+    "sentence_ko": "그는 그 문제를 언급하지 않았다.",
+    "options": [
+      { "text": "Он не упомянул эту проблему.", "correct": true },
+      { "text": "Он решил эту проблему.", "correct": false },
+      { "text": "Он создал эту проблему.", "correct": false },
+      { "text": "Он забыл эту проблему.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "각각",
+    "sentence_ko": "학생들에게 책을 각각 한 권씩 주었다.",
+    "options": [
+      { "text": "Я дал каждому ученику по одной книге.", "correct": true },
+      { "text": "Я дал всем ученикам одну книгу.", "correct": false },
+      { "text": "Я дал некоторым ученикам книги.", "correct": false },
+      { "text": "Я не дал ученикам книги.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "성별",
+    "sentence_ko": "성별에 관계없이 지원할 수 있다.",
+    "options": [
+      { "text": "Можно подать заявку независимо от пола.", "correct": true },
+      { "text": "Можно подать заявку только мужчинам.", "correct": false },
+      { "text": "Можно подать заявку только женщинам.", "correct": false },
+      { "text": "Можно подать заявку только детям.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "활동",
+    "sentence_ko": "그는 다양한 활동을 한다.",
+    "options": [
+      { "text": "Он занимается разнообразной деятельностью.", "correct": true },
+      { "text": "Он отдыхает разными способами.", "correct": false },
+      { "text": "Он работает на разных работах.", "correct": false },
+      { "text": "Он путешествует по разным странам.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "감상",
+    "sentence_ko": "음악을 감상했다.",
+    "options": [
+      { "text": "Я наслаждался музыкой.", "correct": true },
+      { "text": "Я написал музыку.", "correct": false },
+      { "text": "Я продал музыку.", "correct": false },
+      { "text": "Я выключил музыку.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "설문지",
+    "sentence_ko": "설문지를 작성해 주세요.",
+    "options": [
+      { "text": "Пожалуйста, заполните анкету.", "correct": true },
+      { "text": "Пожалуйста, прочитайте анкету.", "correct": false },
+      { "text": "Пожалуйста, выбросьте анкету.", "correct": false },
+      { "text": "Пожалуйста, порвите анкету.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "흔하다",
+    "sentence_ko": "이런 일은 흔하다.",
+    "options": [
+      { "text": "Такие вещи обычны.", "correct": true },
+      { "text": "Такие вещи редки.", "correct": false },
+      { "text": "Такие вещи странны.", "correct": false },
+      { "text": "Такие вещи опасны.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "세계적",
+    "sentence_ko": "그는 세계적인 음악가다.",
+    "options": [
+      { "text": "Он музыкант мирового уровня.", "correct": true },
+      { "text": "Он местный музыкант.", "correct": false },
+      { "text": "Он начинающий музыкант.", "correct": false },
+      { "text": "Он бывший музыкант.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "공원",
+    "sentence_ko": "공원에서 산책했다.",
+    "options": [
+      { "text": "Я гулял в парке.", "correct": true },
+      { "text": "Я гулял в лесу.", "correct": false },
+      { "text": "Я гулял у реки.", "correct": false },
+      { "text": "Я гулял по городу.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "박빙",
+    "sentence_ko": "두 팀의 경기는 박빙이었다.",
+    "options": [
+      { "text": "Матч двух команд был очень близким.", "correct": true },
+      { "text": "Матч двух команд был лёгким.", "correct": false },
+      { "text": "Матч двух команд был скучным.", "correct": false },
+      { "text": "Матч двух команд был отменён.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "근본",
+    "sentence_ko": "문제의 근본을 해결해야 한다.",
+    "options": [
+      { "text": "Нужно решить корень проблемы.", "correct": true },
+      { "text": "Нужно решить следствие проблемы.", "correct": false },
+      { "text": "Нужно решить поверхность проблемы.", "correct": false },
+      { "text": "Нужно решить оболочку проблемы.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "시청",
+    "sentence_ko": "드라마 시청을 즐긴다.",
+    "options": [
+      { "text": "Я люблю смотреть драмы.", "correct": true },
+      { "text": "Я люблю читать драмы.", "correct": false },
+      { "text": "Я люблю писать драмы.", "correct": false },
+      { "text": "Я люблю обсуждать драмы.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "고르다",
+    "sentence_ko": "과일을 고르고 있다.",
+    "options": [
+      { "text": "Я выбираю фрукты.", "correct": true },
+      { "text": "Я мою фрукты.", "correct": false },
+      { "text": "Я ем фрукты.", "correct": false },
+      { "text": "Я покупаю фрукты.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "승자",
+    "sentence_ko": "경기의 승자가 발표되었다.",
+    "options": [
+      { "text": "Победитель матча объявлен.", "correct": true },
+      { "text": "Проигравший матча объявлен.", "correct": false },
+      { "text": "Судья матча объявлен.", "correct": false },
+      { "text": "Зритель матча объявлен.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "유익하다",
+    "sentence_ko": "이 강의는 유익했다.",
+    "options": [
+      { "text": "Эта лекция была полезной.", "correct": true },
+      { "text": "Эта лекция была скучной.", "correct": false },
+      { "text": "Эта лекция была короткой.", "correct": false },
+      { "text": "Эта лекция была отменена.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "중고",
+    "sentence_ko": "중고 책을 샀다.",
+    "options": [
+      { "text": "Я купил подержанную книгу.", "correct": true },
+      { "text": "Я купил новую книгу.", "correct": false },
+      { "text": "Я купил редкую книгу.", "correct": false },
+      { "text": "Я купил старую книгу.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "귀하다",
+    "sentence_ko": "이 보석은 매우 귀하다.",
+    "options": [
+      { "text": "Этот камень очень драгоценный.", "correct": true },
+      { "text": "Этот камень очень дешёвый.", "correct": false },
+      { "text": "Этот камень очень тяжёлый.", "correct": false },
+      { "text": "Этот камень очень гладкий.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "독학",
+    "sentence_ko": "그는 독학으로 한국어를 배웠다.",
+    "options": [
+      { "text": "Он выучил корейский самостоятельно.", "correct": true },
+      { "text": "Он выучил корейский в школе.", "correct": false },
+      { "text": "Он выучил корейский с репетитором.", "correct": false },
+      { "text": "Он выучил корейский в университете.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "참고서",
+    "sentence_ko": "시험 준비를 위해 참고서를 샀다.",
+    "options": [
+      { "text": "Для подготовки к экзамену я купил учебное пособие.", "correct": true },
+      { "text": "Для подготовки к экзамену я купил роман.", "correct": false },
+      { "text": "Для подготовки к экзамену я купил словарь.", "correct": false },
+      { "text": "Для подготовки к экзамену я купил тетрадь.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "교과서",
+    "sentence_ko": "교과서를 펴 주세요.",
+    "options": [
+      { "text": "Откройте учебник.", "correct": true },
+      { "text": "Закройте учебник.", "correct": false },
+      { "text": "Выбросьте учебник.", "correct": false },
+      { "text": "Купите учебник.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "문법",
+    "sentence_ko": "한국어 문법이 어렵다.",
+    "options": [
+      { "text": "Корейская грамматика трудная.", "correct": true },
+      { "text": "Корейское произношение трудное.", "correct": false },
+      { "text": "Корейская лексика трудная.", "correct": false },
+      { "text": "Корейская письменность трудная.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "붙다",
+    "sentence_ko": "그는 시험에 붙었다.",
+    "options": [
+      { "text": "Он прошёл экзамен.", "correct": true },
+      { "text": "Он провалил экзамен.", "correct": false },
+      { "text": "Он пропустил экзамен.", "correct": false },
+      { "text": "Он отменил экзамен.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "신청하다",
+    "sentence_ko": "장학금을 신청했다.",
+    "options": [
+      { "text": "Я подал заявку на стипендию.", "correct": true },
+      { "text": "Я получил стипендию.", "correct": false },
+      { "text": "Я потерял стипендию.", "correct": false },
+      { "text": "Я вернул стипендию.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "작성하다",
+    "sentence_ko": "이력서를 작성했다.",
+    "options": [
+      { "text": "Я составил резюме.", "correct": true },
+      { "text": "Я прочитал резюме.", "correct": false },
+      { "text": "Я порвал резюме.", "correct": false },
+      { "text": "Я потерял резюме.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "낮다",
+    "sentence_ko": "이 의자는 너무 낮다.",
+    "options": [
+      { "text": "Этот стул слишком низкий.", "correct": true },
+      { "text": "Этот стул слишком высокий.", "correct": false },
+      { "text": "Этот стул слишком широкий.", "correct": false },
+      { "text": "Этот стул слишком узкий.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "서투르다",
+    "sentence_ko": "그는 아직 한국어가 서투르다.",
+    "options": [
+      { "text": "Он ещё неумело говорит по-корейски.", "correct": true },
+      { "text": "Он уже свободно говорит по-корейски.", "correct": false },
+      { "text": "Он совсем не говорит по-корейски.", "correct": false },
+      { "text": "Он говорит по-корейски как носитель.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "발급",
+    "sentence_ko": "여권 발급을 신청했다.",
+    "options": [
+      { "text": "Я подал заявку на оформление паспорта.", "correct": true },
+      { "text": "Я потерял паспорт.", "correct": false },
+      { "text": "Я продлил паспорт.", "correct": false },
+      { "text": "Я получил паспорт.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "고시원",
+    "sentence_ko": "그는 고시원에서 산다.",
+    "options": [
+      { "text": "Он живёт в крошечной комнате-студии.", "correct": true },
+      { "text": "Он живёт в большом доме.", "correct": false },
+      { "text": "Он живёт в общежитии.", "correct": false },
+      { "text": "Он живёт в гостинице.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "이외",
+    "sentence_ko": "이외에 다른 질문이 있습니까?",
+    "options": [
+      { "text": "Есть ли другие вопросы, кроме этого?", "correct": true },
+      { "text": "Есть ли этот вопрос?", "correct": false },
+      { "text": "Есть ли ответ на этот вопрос?", "correct": false },
+      { "text": "Есть ли пример к этому вопросу?", "correct": false }
+    ]
+  },
+  {
+    "target_word": "간격",
+    "sentence_ko": "나무 사이의 간격이 넓다.",
+    "options": [
+      { "text": "Расстояние между деревьями большое.", "correct": true },
+      { "text": "Высота деревьев большая.", "correct": false },
+      { "text": "Толщина деревьев большая.", "correct": false },
+      { "text": "Возраст деревьев большой.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "부담스럽다",
+    "sentence_ko": "그의 부탁이 부담스럽다.",
+    "options": [
+      { "text": "Его просьба обременительна.", "correct": true },
+      { "text": "Его просьба приятна.", "correct": false },
+      { "text": "Его просьба проста.", "correct": false },
+      { "text": "Его просьба интересна.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "수료식",
+    "sentence_ko": "수료식에서 인증서를 받았다.",
+    "options": [
+      { "text": "На церемонии окончания курсов я получил сертификат.", "correct": true },
+      { "text": "На выпускном вечере я получил подарок.", "correct": false },
+      { "text": "На собрании я получил задание.", "correct": false },
+      { "text": "На экзамене я получил оценку.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "적극적",
+    "sentence_ko": "그는 회의에서 적극적으로 발언했다.",
+    "options": [
+      { "text": "Он активно высказывался на собрании.", "correct": true },
+      { "text": "Он пассивно слушал на собрании.", "correct": false },
+      { "text": "Он опоздал на собрание.", "correct": false },
+      { "text": "Он пропустил собрание.", "correct": false }
+    ]
+  },
+  {
+    "target_word": "발언하다",
+    "sentence_ko": "그는 회의에서 의견을 발언했다.",
+    "options": [
+      { "text": "Он высказал мнение на собрании.", "correct": true },
+      { "text": "Он скрыл мнение на собрании.", "correct": false },
+      { "text": "Он забыл мнение на собрании.", "correct": false },
+      { "text": "Он изменил мнение на собрании.", "correct": false }
+    ]
   }
 ]
