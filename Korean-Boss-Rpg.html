@@ -612,22 +612,32 @@
             pickSentence = (P) => {
               if (!sentences.length) return null;
 
-              // прогресс по индексу предложения (0..len-1), с небольшим разбросом
-              const progress = Math.min(1, P / 150);
-              const center   = Math.floor(progress * sentences.length);
-              const spread   = Math.floor(sentences.length * 0.10) || 1;
-              const lo = Math.max(0, center - spread);
-              const hi = Math.min(sentences.length - 1, center + spread);
-              const idx = lo + Math.floor(Math.random() * (hi - lo + 1));
-              const s = sentences[idx];
-              const correctOpt = s.options.find(o => o.correct);
+              // 1. Фильтруем предложения по выбранной локации (как мы делали ранее)
+              let pool = sentences;
+              if (selectedLocation && fullDict[selectedLocation]) {
+                const locWords = new Set(Object.keys(fullDict[selectedLocation]));
+                const filtered = sentences.filter(s => locWords.has(s.target_word));
+                if (filtered.length > 0) pool = filtered;
+              }
+
+              // 2. Применяем ТУ ЖЕ логику случайности и прогресса, что и в Zf
+              let s = 0.25,
+                      t = Math.min(1 - s, s + P / 150),
+                      n = Math.random(),
+                      f = t + (n - 0.5) * 2 * s,
+                      pos = Math.max(0, Math.min(pool.length - 1, Math.floor(f * pool.length)));
+
+              const sData = pool[pos];
+              if (!sData) return null;
+
+              const correctOpt = sData.options.find(o => o.correct);
 
               return {
-                ko:         s.sentence_ko,
+                ko:         sData.sentence_ko,
                 ru:         correctOpt ? correctOpt.text : "",
-                len:        s.sentence_ko.length,
-                targetWord: s.target_word,
-                options:    s.options,
+                len:        sData.sentence_ko.length,
+                targetWord: sData.target_word,
+                options:    sData.options,
                 isSentence: true,
               };
             },
@@ -876,7 +886,8 @@
     let fu = (P) => {
       if (!z || In) return;
 
-      const M = (performance.now() - Bo) / 1000 < 5;  // критический?
+      const critTime = z.word.isSentence ? 10 : 5;
+      const M = (performance.now() - Bo) / 1000 < critTime;
 
       if (P.trim().toLowerCase() === z.word.ru.trim().toLowerCase()) {
         /* ─── ВЕРНЫЙ ОТВЕТ ─── */
@@ -1059,7 +1070,13 @@
             font-family: "Do Hyeon", sans-serif;
             font-weight: 400;
             font-style: normal;
-            }
+          }
+          @import url('https://fonts.googleapis.com/css2?family=Tiny5+Duo&display=swap');
+          .rubik-wet-paint-regular  {
+             font-family: "Tiny5 Duo", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+          }
            @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300..700&family=Do+Hyeon&display=swap');
           .font-mono{
             font-family: "Cormorant Garamond", serif;
@@ -1352,15 +1369,32 @@
               children: [
                 /* Предыдущее слово */
                 prevWord && w("div", {
-                  className: "mt-2 text-[11px] px-2.5 py-1 rounded bg-white/5 border border-white/10 text-white/60 inline-flex items-center gap-2 select-text",
-                  children: [
-                    y("span", { className: "opacity-60", children: "⏮    " }),
-                    y("span", { className: "text", children: prevWord.ko }),
-                    y("span", { className: "opacity-50", children: "  —  " }),
-                    y("span", { className: "truncate", children: prevWord.ru })
-                  ]
+                  className: "mt-2 px-2.5 py-1 rounded bg-white/5 border border-white/10 text-white/60 select-text flex flex-col gap-0.5",
+                  children: prevWord.isSentence
+                          ? [
+                            // ── В режиме предложений: 2 строки ──
+                            w("div", { className: "flex items-center gap-2 text-[16px]", children: [
+                                y("span", { className: "opacity-60", children: "⏮" }),
+                                y("span", { className: "font-kr", children: prevWord.ko }),
+                                y("span", { className: "opacity-50", children: "—" }),
+                                y("span", { className: "truncate", children: prevWord.ru })
+                              ]}),
+                            w("div", { className: "flex items-center gap-2 text-[16px] opacity-70 pl-[18px]", children: [
+                                y("span", { className: "font-kr", children: prevWord.targetWord }),
+                                y("span", { className: "opacity-50", children: "—" }),
+                                y("span", { className: "truncate", children: zh[prevWord.targetWord] || "" })
+                              ]})
+                          ]
+                          : [
+                            // ── В режиме слов: 1 строка ──
+                            w("div", { className: "flex items-center gap-2 text-[16px]", children: [
+                                y("span", { className: "opacity-60", children: "⏮" }),
+                                y("span", { className: "text", children: prevWord.ko }),
+                                y("span", { className: "opacity-50", children: "—" }),
+                                y("span", { className: "truncate", children: prevWord.ru })
+                              ]})
+                          ]
                 }),
-
                 /* Двухколоночная панель: слово слева, ответы справа */
                 w("div", { className: "grid md:grid-cols-[1.1fr_0.9fr] gap-0", children: [
 
