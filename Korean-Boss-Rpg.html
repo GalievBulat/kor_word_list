@@ -1356,25 +1356,38 @@
                   children: prevWord.isSentence
                           ? [
                             // ── В режиме предложений: 2 строки ──
-                            w("div", { className: "flex items-center gap-2 text-[11px] overflow-hidden", children: [
+                            w("div", { className: "flex items-center gap-2 text-[11px] w-full min-w-0", children: [
                                 y("span", { className: "opacity-60 shrink-0", children: "⏮" }),
                                 y("span", { className: "font-kr shrink-0", children: prevWord.ko }),
                                 y("span", { className: "opacity-50 shrink-0", children: "—" }),
-                                y("span", { className: "truncate min-w-0 flex-1", children: prevWord.ru })
+                                // Применяем inline-стили для принудительной обрезки
+                                y("span", {
+                                  className: "flex-1 min-w-0",
+                                  style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
+                                  children: prevWord.ru
+                                })
                               ]}),
-                            w("div", { className: "flex items-center gap-2 text-[11px] opacity-70 pl-[11px] overflow-hidden", children: [
+                            w("div", { className: "flex items-center gap-2 text-[11px] opacity-70 pl-[11px] w-full min-w-0", children: [
                                 y("span", { className: "font-kr shrink-0", children: prevWord.targetWord }),
                                 y("span", { className: "opacity-50 shrink-0", children: "—" }),
-                                y("span", { className: "truncate min-w-0 flex-1", children: zh[prevWord.targetWord] || "" })
+                                y("span", {
+                                  className: "flex-1 min-w-0",
+                                  style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
+                                  children: zh[prevWord.targetWord] || ""
+                                })
                               ]})
                           ]
                           : [
                             // ── В режиме слов: 1 строка ──
-                            w("div", { className: "flex items-center gap-2 text-[11px] overflow-hidden", children: [
+                            w("div", { className: "flex items-center gap-2 text-[11px] w-full min-w-0", children: [
                                 y("span", { className: "opacity-60 shrink-0", children: "⏮" }),
                                 y("span", { className: "text shrink-0", children: prevWord.ko }),
                                 y("span", { className: "opacity-50 shrink-0", children: "—" }),
-                                y("span", { className: "truncate min-w-0 flex-1", children: prevWord.ru })
+                                y("span", {
+                                  className: "flex-1 min-w-0",
+                                  style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
+                                  children: prevWord.ru
+                                })
                               ]})
                           ]
                 }),
