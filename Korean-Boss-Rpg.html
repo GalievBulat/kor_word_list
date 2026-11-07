@@ -1356,13 +1356,13 @@
                   children: prevWord.isSentence
                           ? [
                             // ── В режиме предложений: 2 строки ──
-                            w("div", { className: "flex items-center gap-2 text-[16px]", children: [
+                            w("div", { className: "flex items-center gap-2 text-[14px]", children: [
                                 y("span", { className: "opacity-60", children: "⏮" }),
                                 y("span", { className: "font-kr", children: prevWord.ko }),
                                 y("span", { className: "opacity-50", children: "—" }),
                                 y("span", { className: "truncate", children: prevWord.ru })
                               ]}),
-                            w("div", { className: "flex items-center gap-2 text-[16px] opacity-70 pl-[18px]", children: [
+                            w("div", { className: "flex items-center gap-2 text-[14px] opacity-70 pl-[18px]", children: [
                                 y("span", { className: "font-kr", children: prevWord.targetWord }),
                                 y("span", { className: "opacity-50", children: "—" }),
                                 y("span", { className: "truncate", children: zh[prevWord.targetWord] || "" })
@@ -1370,7 +1370,7 @@
                           ]
                           : [
                             // ── В режиме слов: 1 строка ──
-                            w("div", { className: "flex items-center gap-2 text-[16px]", children: [
+                            w("div", { className: "flex items-center gap-2 text-[14px]", children: [
                                 y("span", { className: "opacity-60", children: "⏮" }),
                                 y("span", { className: "text", children: prevWord.ko }),
                                 y("span", { className: "opacity-50", children: "—" }),
