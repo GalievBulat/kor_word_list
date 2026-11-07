@@ -28,7 +28,7 @@
     strong:   [`${GIT_ENEMIES}/mid/1.svg`, `${GIT_ENEMIES}/mid/2.svg`, `${GIT_ENEMIES}/mid/3.svg`],
     elite:    [`${GIT_ENEMIES}/mid/1.svg`, `${GIT_ENEMIES}/mid/2.svg`, `${GIT_ENEMIES}/mid/3.svg`],
     champion: [`${GIT_ENEMIES}/mid/1.svg`, `${GIT_ENEMIES}/mid/2.svg`, `${GIT_ENEMIES}/mid/3.svg`],
-    boss:     [`${GIT_ENEMIES}/mid/1.svg`, `${GIT_ENEMIES}/mid/2.svg`, `${GIT_ENEMIES}/mid/3.svg`],
+    boss:     [`${GIT_ENEMIES}/boss/1.svg`, `${GIT_ENEMIES}/boss/2.svg`, `${GIT_ENEMIES}/boss/3.svg`],
   };
 
   const MAP_IMG = "https://scontent-arn2-1.xx.fbcdn.net/v/t39.105495-0/888319292_4714786955469076_5426502109851239600_n.webp?_nc_cat=101&ccb=1-7&_nc_sid=5b3566&_nc_ohc=w17IrBhSP_0Q7kNvwHmeW3H&_nc_oc=Adr2txJJ-SyG8xwf_7IsZfVHpHVzKqBC6p_sbywkRdvlyBDzBRNV2NOTl1_7RN9H94I&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_gid=7oy3jDYUlSwlgIHl_9rNeA&_nc_ss=79289&oh=00_AQR-1ViEV8DZThW2IZQ6TP5J0gxOS8mAovdTztQKlKxsYA&oe=6AF0F2AB";
@@ -39,13 +39,6 @@
     train_station_location:{x:55,y:50}, city_hall_location:{x:70,y:43}, palace_location:{x:82,y:54},
     library_location:{x:62,y:75}, office_location:{x:88,y:81}, port_location:{x:85,y:93}, podcast_location:{x:55,y:23}
   };
-
-  const Ft = [
-    { emoji: `${GIT_ENEMIES}/ogre.png`, name: "Огр-Палач", color: "bg-red-700" },
-    { emoji: `${GIT_ENEMIES}/dragon.png`, name: "Дракон Акмун", color: "bg-red-900" },
-    { emoji: `${GIT_ENEMIES}/demon_lord.png`, name: "Владыка Преисподней", color: "bg-purple-900" },
-    { emoji: `${GIT_ENEMIES}/world_eater.png`, name: "Пожиратель Миров", color: "bg-purple-900" }
-  ];
 
   const MONSTER_POOL = {
     weakest: {
@@ -562,29 +555,19 @@
               let rank = rankFromIdx(P);
               if (F) {
                 rank = {
-                  weakest: "weak",
-                  weak: "lesser",
-                  lesser: "mid",
-                  mid: "greater",
-                  greater: "strong",
-                  strong: "elite",
-                  elite: "champion",
-                  champion: "champion"
+                  weakest: "weak", weak: "lesser", lesser: "mid",
+                  mid: "greater", greater: "strong", strong: "elite",
+                  elite: "champion", champion: "champion"
                 }[rank] || rank;
               }
               if (I) rank = "boss";
+              const q = generateMonsterIcon(rank);
+              const ie = generateMonsterName(rank);
 
-              const q = I
-                      ? (P < 50 ? Ft[1].emoji : Ft[2].emoji)
-                      : generateMonsterIcon(rank);
-
-              const ie = I
-                      ? (P < 50 ? Ft[1].name : Ft[2].name)
-                      : generateMonsterName(rank);
-
+              // Цвет: для боссов используем фиксированный, для остальных — по длине слова
               const de = I
-                      ? (P < 50 ? Ft[1].color : Ft[2].color)
-                      : (Yo[Math.min(Math.floor(M.len / 1.2), Yo.length - 1)].color);
+                      ? "bg-red-900"
+                      : Yo[Math.min(Math.floor(M.len / 1.2), Yo.length - 1)].color;
 
               let ze = 70 + l * 6 + (F ? 50 : 0) + (I ? 130 : 0),
                       H = 1;
