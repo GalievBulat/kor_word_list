@@ -1356,25 +1356,25 @@
                   children: prevWord.isSentence
                           ? [
                             // ── В режиме предложений: 2 строки ──
-                            w("div", { className: "flex items-center gap-2 text-[11px]", children: [
-                                y("span", { className: "opacity-60", children: "⏮" }),
-                                y("span", { className: "font-kr", children: prevWord.ko }),
-                                y("span", { className: "opacity-50", children: "—" }),
-                                y("span", { className: "truncate", children: prevWord.ru })
+                            w("div", { className: "flex items-center gap-2 text-[11px] overflow-hidden", children: [
+                                y("span", { className: "opacity-60 shrink-0", children: "⏮" }),
+                                y("span", { className: "font-kr shrink-0", children: prevWord.ko }),
+                                y("span", { className: "opacity-50 shrink-0", children: "—" }),
+                                y("span", { className: "truncate min-w-0 flex-1", children: prevWord.ru })
                               ]}),
-                            w("div", { className: "flex items-center gap-2 text-[11px] opacity-70 pl-[11px]", children: [
-                                y("span", { className: "font-kr", children: prevWord.targetWord }),
-                                y("span", { className: "opacity-50", children: "—" }),
-                                y("span", { className: "truncate", children: zh[prevWord.targetWord] || "" })
+                            w("div", { className: "flex items-center gap-2 text-[11px] opacity-70 pl-[11px] overflow-hidden", children: [
+                                y("span", { className: "font-kr shrink-0", children: prevWord.targetWord }),
+                                y("span", { className: "opacity-50 shrink-0", children: "—" }),
+                                y("span", { className: "truncate min-w-0 flex-1", children: zh[prevWord.targetWord] || "" })
                               ]})
                           ]
                           : [
                             // ── В режиме слов: 1 строка ──
-                            w("div", { className: "flex items-center gap-2 text-[11px]", children: [
-                                y("span", { className: "opacity-60", children: "⏮" }),
-                                y("span", { className: "text", children: prevWord.ko }),
-                                y("span", { className: "opacity-50", children: "—" }),
-                                y("span", { className: "truncate", children: prevWord.ru })
+                            w("div", { className: "flex items-center gap-2 text-[11px] overflow-hidden", children: [
+                                y("span", { className: "opacity-60 shrink-0", children: "⏮" }),
+                                y("span", { className: "text shrink-0", children: prevWord.ko }),
+                                y("span", { className: "opacity-50 shrink-0", children: "—" }),
+                                y("span", { className: "truncate min-w-0 flex-1", children: prevWord.ru })
                               ]})
                           ]
                 }),
