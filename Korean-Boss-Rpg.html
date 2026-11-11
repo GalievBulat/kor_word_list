@@ -1301,8 +1301,8 @@
                     className: `text-[64px] md:text-[84px] leading-none animate-bob drop-shadow-[0_8px_20px_rgba(0,0,0,0.9)] ${z.isBoss ? "scale-[1.15]" : ""}`,
                     style: { filter: z.isBoss ? "drop-shadow(0 0 18px rgba(255,0,0,0.6))" : "" },
                     children: w("div", {
-                      className: "flex items-center justify-center w-[80px] h-[80px] md:w-[100px] md:h-[100px]",
-                      style: { height: "130px" },
+                      className: "flex items-center justify-center",
+                      style: { "max-height": "130px", width: "90px" },
                       children: [
                         // 1. The Enemy Image
                         y("img", {
