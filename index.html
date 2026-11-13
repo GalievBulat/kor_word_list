@@ -1656,53 +1656,45 @@
         e === "map_select" && y("div", {
           className: "fixed inset-0 z-50 bg-black/90 backdrop-blur-[6px] flex items-center justify-center p-4",
           children: w("div", {
-            className: "relative rounded-[20px] overflow-hidden border border-white/10 bg-black shadow-[0_20px_80px_rgba(0,0,0,0.8)] inline-block",
+            className: "",
             children: [
-
-              // ФОН (замените MAP_IMG на ссылку к вашей новой карте "The Nocturnal Path")
               y("img", {
                 src: MAP_IMG,
                 className: "block max-h-[80vh] max-w-full w-auto h-auto opacity-80",
                 alt: "Map"
               }),
 
-              // ── ШАГ 1: ВЫБОР РЕЖИМА (Тропа) ──
               mapStep === "modes" && w("div", { className: "absolute inset-0", children: [
-                  ...MODES.map(mode => {
+                  // Фильтруем массив: оставляем только available: true
+                  ...MODES.filter(mode => mode.available).map(mode => {
                     return y("button", {
                       key: mode.id,
-                      disabled: !mode.available,
-                      className: `absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2 group z-10 transition-all ${
-                              mode.available ? "cursor-pointer" : "opacity-40 cursor-not-allowed grayscale"
-                      }`,
+                      className: "absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2 group z-10 transition-all cursor-pointer",
                       style: { left: `${mode.x}%`, top: `${mode.y}%` },
                       onClick: () => {
-                        if (mode.available) setMapStep("categories");
+                        setMapStep("categories");
                       },
                       children: [
                         // Точка (свечение)
                         y("span", {
                           style: {
                             display: "block",
-                            width: mode.available ? "14px" : "10px",
-                            height: mode.available ? "14px" : "10px",
+                            width: "14px",
+                            height: "14px",
                             borderRadius: "50%",
-                            backgroundColor: mode.available ? "#22d3ee" : "#555", // Голубой для доступных
-                            boxShadow: mode.available ? "0 0 15px #22d3ee" : "none",
+                            backgroundColor: "#22d3ee", // Голубой цвет
+                            boxShadow: "0 0 15px #22d3ee",
                             flexShrink: 0,
                           }
                         }),
                         // Название режима
                         y("span", {
-                          className: `px-2.5 py-1 rounded-full bg-black/80 backdrop-blur text-[11px] md:text-[13px] font-bold tracking-wide whitespace-nowrap border ${
-                                  mode.available ? "text-white border-cyan-500/50 group-hover:border-cyan-400" : "text-white/50 border-white/10"
-                          }`,
-                          children: mode.available ? mode.name : `🔒 ${mode.name}`
+                          className: "px-2.5 py-1 rounded-full bg-black/80 backdrop-blur text-[11px] md:text-[13px] font-bold tracking-wide whitespace-nowrap border text-white border-cyan-500/50 group-hover:border-cyan-400",
+                          children: mode.name
                         })
                       ]
                     });
                   }),
-                  // Кнопка "Назад" в меню
                   y("button", {
                     onClick: () => n("onboard"),
                     className: "absolute top-4 left-4 z-20 px-3 py-1.5 rounded bg-black/70 border border-white/20 text-white/70 hover:text-white transition text-[12px] font-bold",
@@ -1710,7 +1702,6 @@
                   })
                 ]}),
 
-              // ── ШАГ 2: ВЫБОР КАТЕГОРИИ (Локации) ──
               mapStep === "categories" && w("div", {
                 className: "absolute inset-0 bg-black/80 backdrop-blur-sm p-6 flex flex-col items-center justify-center overflow-y-auto",
                 children: [
@@ -1735,7 +1726,7 @@
                                     Mf.push(k);
                                   });
                                   setSelectedLocation(loc.id);
-                                  setMapStep("modes"); // Сбрасываем шаг для следующего раза
+                                  setMapStep("modes");
                                   Zo();
                                 },
                                 disabled: count === 0,
