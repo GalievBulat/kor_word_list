@@ -352,8 +352,6 @@
     "вера", "страсть", "месть", "честь", "долг", "клятва", "судьба"
   ];
 
-  var locations_info = {};
-
   var zh = {};
 
   function Ph(e) {
@@ -1673,7 +1671,6 @@
                         className: "flex flex-col items-center gap-2 group transition-all cursor-pointer",
                         onClick: () => setMapStep("categories"),
                         children: [
-                          // Точка (свечение)
                           y("span", {
                             style: {
                               display: "block",
@@ -1739,13 +1736,13 @@
                                       Zo();
                                     },
                                     disabled: count === 0,
-                                    className: `py-3 px-4 rounded-[12px] border-2 transition text-left relative group ${
+                                    className: `py-3 px-4 ${isDefault ? "bg-white/40" : "" } rounded-[12px] border-2 transition text-left relative group ${
                                             count === 0
                                                     ? "bg-zinc-900/50 border-zinc-800 opacity-50 cursor-not-allowed"
                                                     : "bg-zinc-800/80 border-zinc-700 hover:bg-zinc-700 hover:border-cyan-500/50"
                                     }`,
                                     children: [
-                                      y("div", { className: `font-bold text-[13px] mb-1 leading-tight ${isDefault ? "text-cyan-300" : "text-white"}`, children: loc.name }),
+                                      y("div", { className: `font-tiny5 text-[13px] mb-1 leading-tight text-white`, children: loc.name }),
                                       y("div", { className: "text-[10px] opacity-50", children: count > 0 ? `${count} слов` : "Недоступно пока" })
                                     ]
                                   });
@@ -1755,7 +1752,7 @@
                       // Кнопка "Назад к карте"
                       y("button", {
                         onClick: () => setMapStep("modes"),
-                        className: "mt-2 px-6 py-2.5 rounded-[12px] bg-zinc-800 border border-zinc-600 text-white/70 hover:text-white hover:bg-zinc-700 transition font-bold text-[12px]",
+                        className: "mt-4 px-6 py-2.5 rounded-[12px] bg-zinc-800 border border-zinc-600 text-white/70 hover:text-white hover:bg-zinc-700 transition font-bold text-[12px]",
                         children: "← Назад к выбору режима"
                       })
                     ]
@@ -1891,7 +1888,7 @@
               w("div", { className: "mt-6 flex gap-3", children: [
                   y("button", {
                     onClick: Zo,
-                    className: "flex-1 py-3.5 rounded-[12px] bg-white text-black font-black text-[14px]",
+                    className: "flex-1 py-3.5 rounded-[12px] bg-white/10 text-black font-black text-[14px]",
                     children: "🔄 РЕСТАРТ — В БОЙ!"
                   }),
                   y("button", {
