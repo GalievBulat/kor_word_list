@@ -21,7 +21,7 @@
   /* ═══════════════════════════════════════════════════════════ */
   /* D2-STYLE MONSTER NAMES — ПО РАНГАМ                          */
   /* ═══════════════════════════════════════════════════════════ */
-  const GIT_ENEMIES = "https://raw.githubusercontent.com/GalievBulat/kor_word_list/main/pictures/enemies";
+  const GIT_ENEMIES = "./pictures/enemies";
 
   const RANK_IMG = {
     weakest:  [`${GIT_ENEMIES}/weakest/1.svg`, `${GIT_ENEMIES}/weakest/2.svg`, `${GIT_ENEMIES}/weakest/3.svg`, `${GIT_ENEMIES}/weakest/4.svg`, `${GIT_ENEMIES}/weakest/5.svg`],
@@ -35,13 +35,15 @@
     boss:     [`${GIT_ENEMIES}/boss/1.svg`, `${GIT_ENEMIES}/boss/2.svg`, `${GIT_ENEMIES}/boss/3.svg`],
   };
 
-  const MAP_IMG = "https://raw.githubusercontent.com/GalievBulat/kor_word_list/main/pictures/map.jpg"
-  const LOC_POS = {
-    time_location:{x:20,y:15}, police_location:{x:85,y:18}, town_location:{x:10,y:26},
-    market_location:{x:40,y:31}, hospital_location:{x:30,y:51}, workshop_location:{x:12,y:72},
-    train_station_location:{x:55,y:50}, city_hall_location:{x:70,y:43}, palace_location:{x:82,y:54},
-    library_location:{x:62,y:75}, office_location:{x:88,y:81}, port_location:{x:85,y:93}, podcast_location:{x:55,y:23}
-  };
+  const MAP_IMG = "./pictures/map.jpg"
+
+  const MODES = [
+    { id: "arena", name: "Арена", x: 15, y: 65, available: true },
+    { id: "crypt", name: "Склеп", x: 32, y: 50, available: false },
+    { id: "lazarus", name: "Лазарет Шрамов", x: 50, y: 68, available: false },
+    { id: "twin_words", name: "Двойные Слова", x: 68, y: 45, available: false },
+    { id: "grammar", name: "Грамматика", x: 85, y: 60, available: false }
+  ];
 
   const MONSTER_POOL = {
     weakest: {
@@ -311,7 +313,7 @@
   async function loadEmojiMap() {
     try {
       const res = await fetch(
-              "https://raw.githubusercontent.com/GalievBulat/kor_word_list/main/korean_emoji_map.json"
+              "./korean_emoji_map.json"
       );
       if (!res.ok) throw new Error("HTTP " + res.status);
       EMOJI_MAP = await res.json();
@@ -399,6 +401,7 @@
             [shownEmojis, setShownEmojis] = R.useState([]),
             [gameMode, setGameMode] = R.useState("word"),
             [sentences, setSentences] = R.useState([]),
+            [mapStep, setMapStep] = R.useState("modes"),
             [sentencesLoaded, setSentencesLoaded] = R.useState(false),
             [Wo, Ao] = R.useState(false),       // attackAnim
             [Bo, Jn] = R.useState(0),           // lastCorrectAt
@@ -750,7 +753,7 @@
       let cancelled = false;
       async function loadDictionary() {
         try {
-          const res = await fetch("https://raw.githubusercontent.com/GalievBulat/kor_word_list/main/korean_russian_detailed_map.json");
+          const res = await fetch("./korean_russian_detailed_map.json");
           if (!res.ok) throw new Error("HTTP " + res.status);
           const data = await res.json();
           if (!cancelled) {
@@ -772,7 +775,7 @@
       async function loadSentences() {
         try {
           const res = await fetch(
-                  "https://raw.githubusercontent.com/GalievBulat/kor_word_list/main/kor_sentences.json"
+                  "./kor_sentences.json"
           );
           if (!res.ok) throw new Error("HTTP " + res.status);
           const data = await res.json();
@@ -799,7 +802,7 @@
       let cancelled = false;
       async function loadHanja() {
         try {
-          const res = await fetch("https://raw.githubusercontent.com/GalievBulat/kor_word_list/main/hanja_explanations.json");
+          const res = await fetch("./hanja_explanations.json");
           if (!res.ok) throw new Error("HTTP " + res.status);
           const data = await res.json();
           if (!cancelled) setHanjaDict(data);
@@ -1202,7 +1205,7 @@
                       style: {
                         height: "80%",
                         backgroundImage: `url(
-                        "https://raw.githubusercontent.com/GalievBulat/kor_word_list/main/pictures/locations/temple_background.svg"
+                        "./pictures/locations/temple_background.svg"
                         )`,
                         backgroundSize: "auto 100%",
                         backgroundRepeat: "repeat-x",
@@ -1246,7 +1249,7 @@
                           style: { width: "90px", height: "130px" },
                           children: [
                             y("img", {
-                              src: "https://raw.githubusercontent.com/GalievBulat/kor_word_list/main/pictures/hero.svg",
+                              src: "./pictures/hero.svg",
                               alt: "Hero",
                               className: "w-full h-full object-contain absolute -bottom-2",
                               // Комбинируем 3 тени: свечение ближнее, свечение дальнее, чёрная тень на землю
@@ -1652,67 +1655,116 @@
         }),
         e === "map_select" && y("div", {
           className: "fixed inset-0 z-50 bg-black/90 backdrop-blur-[6px] flex items-center justify-center p-4",
-          style: {
-            overflow: "scroll"
-          },
           children: w("div", {
             className: "relative rounded-[20px] overflow-hidden border border-white/10 bg-black shadow-[0_20px_80px_rgba(0,0,0,0.8)] inline-block",
             children: [
+
+              // ФОН (замените MAP_IMG на ссылку к вашей новой карте "The Nocturnal Path")
               y("img", {
                 src: MAP_IMG,
-                className: "block max-h-[80vh] max-w-full w-auto h-auto",
+                className: "block max-h-[80vh] max-w-full w-auto h-auto opacity-80",
                 alt: "Map"
               }),
-              ...Mr.map(loc => {
-                const p = LOC_POS[loc.id];
-                if (!p) return null;
 
-                return y("button", {
-                  key: loc.id,
-                  className: "absolute -translate-x-1/2 -translate-y-1/2 flex flex-row items-center gap-2 group z-10",
-                  style: { left: `${p.x}%`, top: `${p.y}%` },
-                  onClick: () => {
-                    const locDict = fullDict[loc.id];
-                    if (!locDict) return;
-                    for (const k in zh) delete zh[k];
-                    Mf.length = 0;
-                    Object.keys(locDict).forEach(k => {
-                      zh[k] = locDict[k];
-                      Mf.push(k);
+              // ── ШАГ 1: ВЫБОР РЕЖИМА (Тропа) ──
+              mapStep === "modes" && w("div", { className: "absolute inset-0", children: [
+                  ...MODES.map(mode => {
+                    return y("button", {
+                      key: mode.id,
+                      disabled: !mode.available,
+                      className: `absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2 group z-10 transition-all ${
+                              mode.available ? "cursor-pointer" : "opacity-40 cursor-not-allowed grayscale"
+                      }`,
+                      style: { left: `${mode.x}%`, top: `${mode.y}%` },
+                      onClick: () => {
+                        if (mode.available) setMapStep("categories");
+                      },
+                      children: [
+                        // Точка (свечение)
+                        y("span", {
+                          style: {
+                            display: "block",
+                            width: mode.available ? "14px" : "10px",
+                            height: mode.available ? "14px" : "10px",
+                            borderRadius: "50%",
+                            backgroundColor: mode.available ? "#22d3ee" : "#555", // Голубой для доступных
+                            boxShadow: mode.available ? "0 0 15px #22d3ee" : "none",
+                            flexShrink: 0,
+                          }
+                        }),
+                        // Название режима
+                        y("span", {
+                          className: `px-2.5 py-1 rounded-full bg-black/80 backdrop-blur text-[11px] md:text-[13px] font-bold tracking-wide whitespace-nowrap border ${
+                                  mode.available ? "text-white border-cyan-500/50 group-hover:border-cyan-400" : "text-white/50 border-white/10"
+                          }`,
+                          children: mode.available ? mode.name : `🔒 ${mode.name}`
+                        })
+                      ]
                     });
-                    setSelectedLocation(loc.id);
-                    Zo();
-                  },
-                  children: [
-                    y("span", {
-                      style: {
-                        display: "block",
-                        width: "10px",
-                        height: "10px",
-                        minWidth: "10px",
-                        minHeight: "10px",
-                        borderRadius: "50%",
-                        backgroundColor: "#ffe600",
-                        boxShadow: "0 0 10px #ffe600",
-                        flexShrink: 0,
-                      }
-                    }),
-                    y("span", {
-                      className: "opacity-80 px-1.5 py-0.5 md:px-2.5 md:py-1 rounded-full bg-black/70 backdrop-blur text-[9px] md:text-[12px] font-bold tracking-wide text-white border border-white/15 whitespace-nowrap",
-                      children: loc.name
-                    })
-                  ]
-                });
-              }),
-              y("button", {
-                onClick: () => n("onboard"),
-                className: "absolute top-4 left-4 z-20 px-3 py-1.5 rounded bg-black/70 border border-white/20 text-white/70 hover:text-white transition text-[12px] font-bold",
-                children: "← В МЕНЮ"
+                  }),
+                  // Кнопка "Назад" в меню
+                  y("button", {
+                    onClick: () => n("onboard"),
+                    className: "absolute top-4 left-4 z-20 px-3 py-1.5 rounded bg-black/70 border border-white/20 text-white/70 hover:text-white transition text-[12px] font-bold",
+                    children: "← В МЕНЮ"
+                  })
+                ]}),
+
+              // ── ШАГ 2: ВЫБОР КАТЕГОРИИ (Локации) ──
+              mapStep === "categories" && w("div", {
+                className: "absolute inset-0 bg-black/80 backdrop-blur-sm p-6 flex flex-col items-center justify-center overflow-y-auto",
+                children: [
+                  y("div", { className: "text-[11px] tracking-[0.3em] opacity-50 mb-2", children: "АРЕНА" }),
+                  y("div", { className: "font-d2 text-[28px] md:text-[36px] text-cyan-300 drop-shadow-[0_2px_0_#000] mb-6", children: "Выбери категорию" }),
+
+                  // Сетка категорий
+                  w("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-[600px]", children:
+                            Mr.map(loc => {
+                              const count = fullDict[loc.id] ? Object.keys(fullDict[loc.id]).length : 0;
+                              const isDefault = loc.id === "podcast_location";
+
+                              return y("button", {
+                                key: loc.id,
+                                onClick: () => {
+                                  const locDict = fullDict[loc.id];
+                                  if (!locDict) return;
+                                  for (const k in zh) delete zh[k];
+                                  Mf.length = 0;
+                                  Object.keys(locDict).forEach(k => {
+                                    zh[k] = locDict[k];
+                                    Mf.push(k);
+                                  });
+                                  setSelectedLocation(loc.id);
+                                  setMapStep("modes"); // Сбрасываем шаг для следующего раза
+                                  Zo();
+                                },
+                                disabled: count === 0,
+                                className: `py-3 px-4 rounded-[12px] border-2 transition text-left relative group ${
+                                        count === 0
+                                                ? "bg-zinc-900/50 border-zinc-800 opacity-50 cursor-not-allowed"
+                                                : "bg-zinc-800/80 border-zinc-700 hover:bg-zinc-700 hover:border-cyan-500/50"
+                                }`,
+                                children: [
+                                  y("div", { className: `font-bold text-[13px] mb-1 leading-tight ${isDefault ? "text-cyan-300" : "text-white"}`, children: loc.name }),
+                                  y("div", { className: "text-[10px] opacity-50", children: count > 0 ? `${count} слов` : "Нет слов" })
+                                ]
+                              });
+                            })
+                  }),
+
+                  // Кнопка "Назад к карте"
+                  w("div", { className: "mt-6", children: [
+                      y("button", {
+                        onClick: () => setMapStep("modes"),
+                        className: "px-6 py-2 rounded-[12px] bg-zinc-800 border border-zinc-600 text-white/70 hover:text-white hover:bg-zinc-700 transition font-bold text-[12px]",
+                        children: "← Назад к выбору режима"
+                      })
+                    ]})
+                ]
               })
             ]
           })
         }),
-
         /* ═══════════ PAUSED ═══════════ */
         e === "paused" && y("div", {
           className: "fixed inset-0 z-40 bg-black/70 backdrop-blur flex items-center justify-center p-4",
