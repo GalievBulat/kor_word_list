@@ -45,6 +45,42 @@
     { id: "grammar", name: "Грамматика", available: false }
   ];
 
+  const GAME_OVER_QUOTES = [
+    "Твоя кровь окропит эти земли. Ты будешь забыт.",
+    "Ты останешься гнить в этой грязи со своими отсталыми идеями.",
+    "Возвращайся в свинарник, там твое место.",
+    "Ты будешь немедленно отправлен обратно в ту деревню, из которой приполз.",
+    "Твой мозг сгнил задолго до того, как я вырвал твое сердце.",
+    "Ты даже не смог прочитать слово из трех букв. Жалкое зрелище.",
+    "Ты позоришь своих предков. И свою свинью.",
+    "Мне даже не пришлось напрягаться, чтобы раздавить такую букашку.",
+    "Мои псы уже точат клыки на твои кости.",
+    "Черви в этой земле сегодня будут пировать.",
+    "Ты пахнешь страхом, потом и навозом. Омерзительно.",
+    "Еще одна бесполезная туша для моей кормушки.",
+    "Я скормлю твои останки тем, кто хотя бы умеет сражаться.",
+    "Ты думал, что твое жалкое знание спасет тебя? Смешно.",
+    "Убирайся с моих глаз, пока я не решил стереть в порошок и твою память.",
+    "Ты не воин. Ты просто мясо, которое умеет ходить.",
+    "Слабость — это твоя единственная врожденная черта."
+  ];
+
+  const VICTORY_QUOTES = [
+    "Свет знаний разогнал вековую тьму. Наконец-то эти земли обрели покой.",
+    "Я пришел не убивать, а освобождать. Твои мучения наконец-то закончились.",
+    "Даже падшие заслуживают тишины. Пусть твоя бесконечная ночь сменится вечным сном.",
+    "Тьма отступила. Я дарю тебе прощение и освобождение от этого проклятия.",
+    "Твоя империя пала, но из её руин взойдёт новая жизнь. Без боли и страданий.",
+    "Пепел твоих злодеяний станет удобрением для нового, светлого мира.",
+    "Души, что ты поглотил, теперь свободны. Ты больше не причинишь никому вреда.",
+    "Битва окончена. Сложи оружие, и пусть в этих землях воцарится долгожданная гармония.",
+    "Насилие порождает лишь насилие. Но сегодня я положил конец этому порочному кругу.",
+    "Ты был великим врагом. Но даже величайшее зло достойно смерти.",
+    "Свет всегда побеждает тьму, если в сердце есть вера. Этот мир спасён.",
+    "Спи спокойно. Твой кошмар наяву закончился, и я прослежу, чтобы он не вернулся.",
+    "Кровь больше не прольётся. Своими знаниями ты помог мне спасти этот мир от самого себя."
+  ];
+
   const MONSTER_POOL = {
     weakest: {
       names: [
@@ -400,6 +436,8 @@
             [gameMode, setGameMode] = R.useState("word"),
             [sentences, setSentences] = R.useState([]),
             [mapStep, setMapStep] = R.useState("modes"),
+            [deathQuote, setDeathQuote] = R.useState("Очень жаль..."),
+            [victoryQuote, setVictoryQuote] = R.useState("Ты прошел игру!"),
             [sentencesLoaded, setSentencesLoaded] = R.useState(false),
             [Wo, Ao] = R.useState(false),       // attackAnim
             [Bo, Jn] = R.useState(0),           // lastCorrectAt
@@ -537,10 +575,42 @@
 
             /* ─────────── ВЫБОР СЛОВА ─────────── */
             Zf = (P) => {
-              if (gameMode === "sentence") {
+              const isSentence = gameMode === "sentence";
+              const rollMistake = Math.random() < 0.25; // 25% шанс на слово с ошибкой
+
+              if (rollMistake) {
+                console.log("rollMistake")
+                if (isSentence) {
+                  const failedSentences = sentences.filter(s => {
+                    const stat = wordStats[s.target_word];
+                    return stat && stat.wrong > 0;
+                  });
+                  if (failedSentences.length > 0) {
+                    const s = failedSentences[Math.floor(Math.random() * failedSentences.length)];
+                    const correctOpt = s.options.find(o => o.correct);
+                    return {
+                      ko: s.sentence_ko,
+                      ru: correctOpt ? correctOpt.text : "",
+                      len: s.sentence_ko.length,
+                      targetWord: s.target_word,
+                      options: s.options,
+                      isSentence: true,
+                    };
+                  }
+                } else {
+                  const failedWords = xr.filter(w => {
+                    const stat = wordStats[w.ko];
+                    return stat && stat.wrong > 0;
+                  });
+                  if (failedWords.length > 0) {
+                    return failedWords[Math.floor(Math.random() * failedWords.length)];
+                  }
+                }
+              }
+
+              if (isSentence) {
                 const s = pickSentence(P);
                 if (s) return s;
-                // fallback: если предложения не загрузились — берём слово
               }
 
               let s = 0.2,
@@ -950,10 +1020,10 @@
               const Pe = H + 1;
               if (z.isBoss) C((Le) => Le + 1), L((Le) => Math.min(2, Le + 1));
               if (Pe > 149) {
+                setVictoryQuote(randomItem(VICTORY_QUOTES));
                 n("victory");
               } else {
                 Ko(Pe)
-                //todo: death animation
               }
               return Pe;
             });
@@ -984,7 +1054,7 @@
         Tt("wrong");
         const elapsedMs = performance.now() - Bo;
         setWordStats((s) => {
-          const k = z.word.ko;
+          const k = z.word.targetWord || z.word.ko;
           const prev = s[k] || { correct: 0, wrong: 0, totalTime: 0 };
           return { ...s, [k]: {
               correct: prev.correct,
@@ -1003,6 +1073,7 @@
         o((ie) => {
           const de = ie - q;
           if (de <= 0) {
+            setDeathQuote(randomItem(GAME_OVER_QUOTES));
             n("gameover");
             return 0;
           }
@@ -1051,6 +1122,8 @@
       su.clear();
       setWordStats({});
       hintWordsRef.current.clear();
+      setVictoryQuote("Ты прошел игру!");
+      setDeathQuote("Очень жаль...");
       n("playing");
     };
 
@@ -1801,9 +1874,11 @@
                 children: "Пожиратель Миров пал!"
               }),
               y("div", {
-                className: "text-[14px] leading-relaxed opacity-80 mb-5",
-                children: ["Ты прошел игру!", y("br", {}), "Клинок молчит. Монстры разбежались. Время отдохнуть."]
+                className: "text-[14px] md:text-[16px] text-yellow-300/90 italic mt-1 mb-5 px-4 leading-relaxed font-d2 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]",
+                children: `"${victoryQuote}"`
               }),
+
+              // ... остальной код (статистика) ...
               w("div", { className: "grid grid-cols-3 gap-3 mb-5", children: [
                   w("div", { className: "rounded-[12px] bg-white/5 border border-yellow-400/20 p-3", children: [
                       y("div", { className: "text-[22px] font-black text-yellow-200", children: S }),
@@ -1841,8 +1916,7 @@
 
               w("div", { className: "text-center", children: [
                   y("div", { className: "text-[56px] mb-2", children: "💀" }),
-                  y("div", { className: "text-[32px] font-black tracking-tight", children: "ТЫ ПАЛ В БОЮ" }),
-                  y("div", { className: "text-[13px] opacity-60 mt-1", children: "Очень жаль..." })
+                  y("div", { className: "text-[32px] font-black tracking-tight text-red-500 drop-shadow-[0_2px_0_#000]", children: `"${deathQuote}"` })
                 ]}),
 
               w("div", { className: "mt-6 grid grid-cols-3 gap-3", children: [
@@ -1886,7 +1960,7 @@
               w("div", { className: "mt-6 flex gap-3", children: [
                   y("button", {
                     onClick: Zo,
-                    className: "flex-1 py-3.5 rounded-[12px] bg-white/10 text-black font-black text-[14px]",
+                    className: "flex-1 py-3.5 rounded-[12px] bg-white/10 border border-zinc-600 font-bold  text-[14px]",
                     children: "🔄 РЕСТАРТ — В БОЙ!"
                   }),
                   y("button", {
