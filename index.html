@@ -543,7 +543,7 @@
                 // fallback: если предложения не загрузились — берём слово
               }
 
-              let s = 0.25,
+              let s = 0.2,
                       t = Math.min(1 - s, s + P / 150),
                       n = Math.random(),
                       f = t + (n - 0.5) * 2 * s,
@@ -609,7 +609,7 @@
               }
 
               // 2. Применяем ТУ ЖЕ логику случайности и прогресса, что и в Zf
-              let s = 0.25,
+              let s = 0.2,
                       t = Math.min(1 - s, s + P / 150),
                       n = Math.random(),
                       f = t + (n - 0.5) * 2 * s,
@@ -878,7 +878,6 @@
               return () => window.removeEventListener("keydown", P);
             }, [e, Ir, t, Fr, z]);
 
-    /* ─────────── ХЕЛПЕР: УРОН ─────────── */
     let Ur = (P, I, F = 70) => {
       Ho.current++;
       const M = { id: Ho.current, x: F, y: 50 + (Math.random() * 20 - 10), value: P, crit: I };
@@ -955,7 +954,6 @@
               } else {
                 Ko(Pe)
                 //todo: death animation
-                //setTimeout(() => Ko(Pe), 600);
               }
               return Pe;
             });
