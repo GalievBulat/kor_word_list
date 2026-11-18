@@ -487,59 +487,73 @@
               {
                 name: "Площадь Застывших Часов",
                 id: "time_location",
+                bgImage: "./pictures/locations/clocks_location.svg"
               },
               {
                 name: "Застава Последнего Следа",
                 id: "police_location",
+                bgImage: "./pictures/locations/temple_background.svg"
               },
               {
                 name: "Переулок Выбитых Окон",
                 id: "town_location",
+                bgImage: "./pictures/locations/temple_background.svg"
               },
               {
                 name: "Базар Алхимика",
                 id: "market_location",
+                bgImage: "./pictures/locations/temple_background.svg"
               },
               {
                 name: "Лазарет Шрамов",
                 id: "hospital_location",
+                bgImage: "./pictures/locations/temple_background.svg"
               },
               {
                 name: "Кузница Поступков",
                 id: "workshop_location",
+                bgImage: "./pictures/locations/temple_background.svg"
               },
               {
                 name: "Станция Мёртвых Путей",
                 id: "train_station_location",
+                bgImage: "./pictures/locations/temple_background.svg"
               },
               {
                 name: "Чертог Истлевших Страстей",
                 id: "palace_location",
+                bgImage: "./pictures/locations/temple_background.svg"
               },
               {
                 name: "Палата Семи Печатей",
                 id: "city_hall_location",
+                bgImage: "./pictures/locations/temple_background.svg"
               },
               {
                 name: "Архив Забытых Имён",
                 id: "library_location",
+                bgImage: "./pictures/locations/library_location.svg"
               },
               {
                 name: "Гильдия Тёмных Договоров",
                 id: "office_location",
+                bgImage: "./pictures/locations/temple_background.svg"
               },
               {
                 name: "Гавань Утопленников",
                 id: "port_location",
+                bgImage: "./pictures/locations/temple_background.svg"
               },
               {
                 name: "Чертог Глашатаев",
                 id: "podcast_location",
+                bgImage: "./pictures/locations/podcast_location.svg"
               },
               {
                 name: "Школа боли",
                 id: "school_location",
-              },
+                bgImage: "./pictures/locations/school_location.svg"
+              }
             ], []),
 
             It = R.useMemo(() => {
@@ -1306,9 +1320,7 @@
                       className: "absolute inset-0 pointer-events-none select-none overflow-hidden",
                       style: {
                         height: "80%",
-                        backgroundImage: `url(
-                        "./pictures/locations/temple_background.svg"
-                        )`,
+                        backgroundImage: It.bgImage ? `url("${It.bgImage}")` : "none",
                         backgroundSize: "auto 100%",
                         backgroundRepeat: "repeat-x",
                         animation: "bgScroll 12000s linear infinite",
@@ -1713,7 +1725,7 @@
           children: w("div", {
             className: "w-full max-w-[560px] rounded-[20px] bg-gradient-to-b from-zinc-900 to-black border-2 border-zinc-700 p-6 md:p-8 shadow-[0_30px_120px_rgba(0,0,0,0.9)]",
             children: [
-              y("div", { className: "text-[11px] tracking-[0.3em] opacity-50 mb-3", children: "K-WORD SLAYER • VER 1.3.1" }),
+              y("div", { className: "text-[11px] tracking-[0.3em] opacity-50 mb-3", children: "K-WORD SLAYER • VER 1.3.2" }),
               w("div", {
                 className: "font-kr text-[36px] md:text-[48px] leading-[0.9] mb-3",
                 children: ["Title"]

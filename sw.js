@@ -1,4 +1,4 @@
-const CACHE_NAME = 'k-word-slayer-v1.3.1';
+const CACHE_NAME = 'k-word-slayer-v1.3.2';
 
 // Файлы, которые кэшируются сразу при установке
 const CORE_ASSETS = [
