@@ -293,6 +293,34 @@
     return randomItem(icons);
   };
 
+  const SECRET = "correct-horse-battery-staple";
+
+  async function dailyCode(dateStr) {
+    const enc = new TextEncoder();
+    const k = await crypto.subtle.importKey(
+            "raw", enc.encode(SECRET),
+            { name: "HMAC", hash: "SHA-256" }, false, ["sign"]
+    );
+    const sig = await crypto.subtle.sign("HMAC", k, enc.encode(dateStr));
+    const hex = [...new Uint8Array(sig).slice(0, 8)]
+            .map(b => b.toString(16).padStart(2, "0")).join("").toUpperCase();
+    return hex.match(/.{4}/g).join("-");
+  }
+
+  const onGamePassed = async () => {
+    try {
+      const date = todayLocal();
+      const code = await dailyCode(date);
+      setDailyCodeState(code);
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(code).catch(() => {});
+      }
+    } catch (e) {
+      console.error("Ошибка при получении кода:", e);
+      setDailyCodeState("Ошибка получения кода");
+    }
+  };
+
   const generateMonsterName = (rank = "weakest") => {
     const pool = MONSTER_POOL[rank] || MONSTER_POOL.weakest;
     const base = randomItem(pool.names);
@@ -439,6 +467,7 @@
             [deathQuote, setDeathQuote] = R.useState("Очень жаль..."),
             [victoryQuote, setVictoryQuote] = R.useState("Ты прошел игру!"),
             [sentencesLoaded, setSentencesLoaded] = R.useState(false),
+            [dailyCodeState, setDailyCodeState] = R.useState(""),
             [Wo, Ao] = R.useState(false),       // attackAnim
             [Bo, Jn] = R.useState(0),           // lastCorrectAt
             [su] = R.useState(() => new Set()), // set of learned words
@@ -1802,10 +1831,19 @@
                                       if (!locDict) return;
                                       for (const k in zh) delete zh[k];
                                       Mf.length = 0;
-                                      Object.keys(locDict).forEach(k => {
+
+                                      const keys = Object.keys(locDict);
+                                      for (let i = keys.length - 1; i > 0; i--) {
+                                        const j = Math.floor(Math.random() * (i + 1));
+                                        [keys[i], keys[j]] = [keys[j], keys[i]];
+                                      }
+
+                                      // Заполняем словарь в случайном порядке
+                                      keys.forEach(k => {
                                         zh[k] = locDict[k];
                                         Mf.push(k);
                                       });
+
                                       setSelectedLocation(loc.id);
                                       setMapStep("modes");
                                       Zo();
@@ -1906,7 +1944,17 @@
                       y("div", { className: "text-[10px] opacity-60", children: "ФИНАЛЬНЫЙ КЛИНОК" }),
                       w("div", { className: "text-[13px] mt-1 font-bold", children: ["⚔️ ", ["Меч", "Огненный Клинок", "Лазерный Клинок"][N]] })
                     ]})
-                ]})
+                ]}),
+              y("button", {
+                onClick: onGamePassed,
+                className: "px-5 py-3.5 rounded-[12px] bg-zinc-800 border border-zinc-600 font-bold text-[14px]",
+                children: "🔓"
+              }),
+
+              y("div", {
+                className: "text-[14px] md:text-[16px] text-yellow-300/90 italic mt-1 mb-5 px-4 leading-relaxed font-d2 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]",
+                children: dailyCodeState
+              }),
             ]
           })
         }),
