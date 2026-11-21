@@ -1331,10 +1331,77 @@
                 }),
                 /* Земля */
                 w("div", {
-                  className: "absolute bottom-0 left-0 right-0 h-[20%] bg-gradient-to-t from-black via-zinc-900 to-zinc-800 border-t-2 border-white/10",
+                  className: "absolute bottom-0 left-0 right-0 h-[20%] bg-gradient-to-t from-black via-zinc-900 to-zinc-800 border-white/10",
                   children: [
                     y("div", { className: "absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.04)_50%,transparent_100%)] animate-[pulseGlow_2s_infinite]" }),
-                    y("div", { className: "absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-emerald-500/30 via-cyan-400/30 to-purple-500/30" })
+                    y("div", { className: "absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-emerald-500/30 via-cyan-400/30 to-purple-500/30" }),
+                    /* Предыдущее слово */
+                    prevWord && w("div", {
+                      className: "mt-1 px-2.5 py-1 rounded text-white/60 select-text flex flex-col gap-0.5",
+                      children: prevWord.isSentence
+                              ? [
+                                // ── Строка 1: Предложение ──
+                                w("div", { className: "flex items-center gap-2 text-[14px] w-full min-w-0", children: [
+                                    y("span", { className: "opacity-60 shrink-0", children: "⏮" }),
+                                    y("span", { className: "font-kr shrink-0", children: prevWord.ko }),
+                                    y("span", { className: "opacity-50 shrink-0", children: "—" }),
+                                    y("span", {
+                                      className: "flex-1 min-w-0",
+                                      style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
+                                      children: prevWord.ru
+                                    })
+                                  ]}),
+
+                                // ── Строка 2: Целевое слово ──
+                                w("div", { className: "flex items-center gap-2 text-[14px] opacity-70 pl-[14px] w-full min-w-0", children: [
+                                    y("span", { className: "font-kr shrink-0", children: prevWord.targetWord }),
+                                    y("span", { className: "opacity-50 shrink-0", children: "—" }),
+                                    y("span", {
+                                      className: "flex-1 min-w-0",
+                                      style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
+                                      children: zh[prevWord.targetWord] || ""
+                                    })
+                                  ]}),
+
+                                // ── Строка 3: Объяснение ханча (если есть) ──
+                                hanjaDict[prevWord.targetWord] && w("div", {
+                                  className: "mt-1 pl-[22px] text-[14px] leading-tight break-words",
+                                  style: { color: "rgba(253, 230, 138, 0.7)" }, // Мягкий золотистый цвет
+                                  children: hanjaDict[prevWord.targetWord]
+                                })
+                              ]
+                              : [
+                                // ── Строка 1: Обычное слово ──
+                                w("div", { className: "flex items-center gap-2 text-[14px] w-full min-w-0", children: [
+                                    y("span", { className: "opacity-60 shrink-0", children: "⏮" }),
+                                    y("span", { className: "font-kr shrink-0", children: prevWord.ko }),
+                                    y("span", { className: "opacity-50 shrink-0", children: "—" }),
+                                    y("span", {
+                                      className: "flex-1 min-w-0",
+                                      style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
+                                      children: prevWord.ru
+                                    })
+                                  ]}),
+
+                                // ── Строка 2: Объяснение ханча (если есть) ──
+                                hanjaDict[prevWord.ko] && w("div", {
+                                  className: "mt-1 pl-[22px] text-[14px] leading-tight break-words",
+                                  style: { color: "rgba(253, 230, 138, 0.7)" },
+                                  children: hanjaDict[prevWord.ko]
+                                }),
+
+                                // ── Строка 3: Предложение с этим словом (если есть) ──
+                                (() => {
+                                  const s = sentences.find(item => item.target_word === prevWord.ko);
+                                  if (!s) return null;
+                                  return y("div", {
+                                    className: "mt-3 pl-[22px] text-[14px] leading-tight text-white/40 italic font-kr",
+                                    children: s.sentence_ko
+                                  });
+                                })()
+                              ]
+                    }),
+
                   ]
                 })
               ]
@@ -1520,62 +1587,6 @@
             w("div", {
               className: "rounded-[16px] bg-zinc-900/90 backdrop-blur border border-zinc-700 shadow-[0_10px_40px_rgba(0,0,0,0.6)] overflow-hidden",
               children: [
-                /* Предыдущее слово */
-                prevWord && w("div", {
-                  className: "mt-2 px-2.5 py-1 rounded bg-white/5 border border-white/10 text-white/60 select-text flex flex-col gap-0.5",
-                  children: prevWord.isSentence
-                          ? [
-                            // ── Строка 1: Предложение ──
-                            w("div", { className: "flex items-center gap-2 text-[14px] w-full min-w-0", children: [
-                                y("span", { className: "opacity-60 shrink-0", children: "⏮" }),
-                                y("span", { className: "font-kr shrink-0", children: prevWord.ko }),
-                                y("span", { className: "opacity-50 shrink-0", children: "—" }),
-                                y("span", {
-                                  className: "flex-1 min-w-0",
-                                  style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
-                                  children: prevWord.ru
-                                })
-                              ]}),
-
-                            // ── Строка 2: Целевое слово ──
-                            w("div", { className: "flex items-center gap-2 text-[14px] opacity-70 pl-[14px] w-full min-w-0", children: [
-                                y("span", { className: "font-kr shrink-0", children: prevWord.targetWord }),
-                                y("span", { className: "opacity-50 shrink-0", children: "—" }),
-                                y("span", {
-                                  className: "flex-1 min-w-0",
-                                  style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
-                                  children: zh[prevWord.targetWord] || ""
-                                })
-                              ]}),
-
-                            // ── Строка 3: Объяснение ханча (если есть) ──
-                            hanjaDict[prevWord.targetWord] && w("div", {
-                              className: "mt-1 pl-[22px] text-[14px] leading-tight break-words",
-                              style: { color: "rgba(253, 230, 138, 0.7)" }, // Мягкий золотистый цвет
-                              children: hanjaDict[prevWord.targetWord]
-                            })
-                          ]
-                          : [
-                            // ── Строка 1: Обычное слово ──
-                            w("div", { className: "flex items-center gap-2 text-[14px] w-full min-w-0", children: [
-                                y("span", { className: "opacity-60 shrink-0", children: "⏮" }),
-                                y("span", { className: "font-kr shrink-0", children: prevWord.ko }),
-                                y("span", { className: "opacity-50 shrink-0", children: "—" }),
-                                y("span", {
-                                  className: "flex-1 min-w-0",
-                                  style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
-                                  children: prevWord.ru
-                                })
-                              ]}),
-
-                            // ── Строка 2: Объяснение ханча (если есть) ──
-                            hanjaDict[prevWord.ko] && w("div", {
-                              className: "mt-1 pl-[22px] text-[14px] leading-tight break-words",
-                              style: { color: "rgba(253, 230, 138, 0.7)" },
-                              children: hanjaDict[prevWord.ko]
-                            })
-                          ]
-                }),
                 /* Двухколоночная панель: слово слева, ответы справа */
                 w("div", { className: "grid md:grid-cols-[1.1fr_0.9fr] gap-0", children: [
 
