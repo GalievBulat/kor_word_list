@@ -309,19 +309,6 @@
     return hex.match(/.{4}/g).join("-");
   }
 
-  const onGamePassed = async () => {
-    try {
-      const date = todayLocal();
-      const code = await dailyCode(date);
-      setDailyCodeState(code);
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(code).catch(() => {});
-      }
-    } catch (e) {
-      console.error("Ошибка при получении кода:", e);
-      setDailyCodeState("Ошибка получения кода");
-    }
-  };
 
   // Возвращает сегодняшнюю дату в формате YYYY-MM-DD
   const todayLocal = () => {
@@ -437,6 +424,19 @@
   /* ═══════════════════════════════════════════════════════════ */
 
   function Mo() {
+    const onGamePassed = async () => {
+      try {
+        const date = todayLocal();
+        const code = await dailyCode(date);
+        setDailyCodeState(code);
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(code).catch(() => {});
+        }
+      } catch (e) {
+        console.error("Ошибка при получении кода:", e);
+        setDailyCodeState("Ошибка получения кода");
+      }
+    };
     /* ─────────── СОСТОЯНИЯ ─────────── */
     let [e, n] = R.useState("onboard"),     // экран: onboard | playing | paused | victory | gameover
             [t, r] = R.useState("choice"),      // режим: choice | input
