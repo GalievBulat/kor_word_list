@@ -1385,7 +1385,7 @@
                                   const s = sentences.find(item => item.target_word === prevWord.ko);
                                   if (!s) return null;
                                   return y("div", {
-                                    className: "mt-3 pl-[22px] text-[18px] leading-tight text-white/40 italic font-kr",
+                                    className: "mt-3 pl-[22px] text-[14px] leading-tight text-white/40 italic font-kr",
                                     children: s.sentence_ko
                                   });
                                 })()
@@ -1732,7 +1732,7 @@
           children: w("div", {
             className: "w-full max-w-[560px] rounded-[20px] bg-gradient-to-b from-zinc-900 to-black border-2 border-zinc-700 p-6 md:p-8 shadow-[0_30px_120px_rgba(0,0,0,0.9)]",
             children: [
-              y("div", { className: "text-[11px] tracking-[0.3em] opacity-50 mb-3", children: "VER 1.3.5" }),
+              y("div", { className: "text-[11px] tracking-[0.3em] opacity-50 mb-3", children: "VER 1.3.6" }),
               w("div", {
                 className: "font-kr text-[36px] md:text-[48px] leading-[0.9] mb-3",
                 children: ["K-word slayer"]
