@@ -1354,9 +1354,14 @@
                                   ]}),
 
                                 // ── Строка 3: Объяснение ханча (если есть) ──
-                                hanjaDict[prevWord.targetWord] && w("div", {
-                                  className: "mt-1 pl-[22px] text-[14px] leading-tight break-words",
-                                  style: { color: "rgba(253, 230, 138, 0.7)" }, // Мягкий золотистый цвет
+                                hanjaDict[prevWord.targetWord] && y("div", {
+                                  className: "mt-1 pl-[22px] text-[14px] leading-tight w-full min-w-0",
+                                  style: {
+                                    color: "rgba(253, 230, 138, 0.7)",
+                                    whiteSpace: "nowrap",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis"
+                                  },
                                   children: hanjaDict[prevWord.targetWord]
                                 })
                               ]
@@ -1374,9 +1379,14 @@
                                   ]}),
 
                                 // ── Строка 2: Объяснение ханча (если есть) ──
-                                hanjaDict[prevWord.ko] && w("div", {
-                                  className: "mt-1 pl-[22px] text-[14px] leading-tight break-words",
-                                  style: { color: "rgba(253, 230, 138, 0.7)" },
+                                hanjaDict[prevWord.ko] && y("div", {
+                                  className: "mt-1 pl-[22px] text-[14px] leading-tight w-full min-w-0",
+                                  style: {
+                                    color: "rgba(253, 230, 138, 0.7)",
+                                    whiteSpace: "nowrap",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis"
+                                  },
                                   children: hanjaDict[prevWord.ko]
                                 }),
 
@@ -1385,7 +1395,8 @@
                                   const s = sentences.find(item => item.target_word === prevWord.ko);
                                   if (!s) return null;
                                   return y("div", {
-                                    className: "mt-3 pl-[22px] text-[14px] leading-tight text-white/40 italic font-kr",
+                                    className: "mt-3 pl-[22px] text-[14px] leading-tight text-white/40 italic font-kr w-full min-w-0",
+                                    style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
                                     children: s.sentence_ko
                                   });
                                 })()
